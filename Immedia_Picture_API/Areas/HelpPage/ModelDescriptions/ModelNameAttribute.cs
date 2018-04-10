@@ -1,6 +1,6 @@
 using System;
 
-namespace Immedia_Picture_API.Areas.HelpPage.ModelDescriptions
+namespace Immedia.Picture.Api.Areas.HelpPage.ModelDescriptions
 {
     /// <summary>
     /// Use this attribute to change the name of the <see cref="ModelDescription"/> generated for a type.

@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using Newtonsoft.Json;
 
-namespace Immedia_Picture_API.Models
+namespace Immedia.Picture.Api.Models
 {
     // Models used as parameters to AccountController actions.
 

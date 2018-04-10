@@ -3,7 +3,7 @@ using System.Text;
 using System.Web;
 using System.Web.Http.Description;
 
-namespace Immedia_Picture_API.Areas.HelpPage
+namespace Immedia.Picture.Api.Areas.HelpPage
 {
     public static class ApiDescriptionExtensions
     {

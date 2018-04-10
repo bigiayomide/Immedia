@@ -13,11 +13,11 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
-using Immedia_Picture_API.Models;
-using Immedia_Picture_API.Providers;
-using Immedia_Picture_API.Results;
+using Immedia.Picture.Api.Models;
+using Immedia.Picture.Api.Providers;
+using Immedia.Picture.Api.Results;
 
-namespace Immedia_Picture_API.Controllers
+namespace Immedia.Picture.Api.Controllers
 {
     [Authorize]
     [RoutePrefix("api/Account")]

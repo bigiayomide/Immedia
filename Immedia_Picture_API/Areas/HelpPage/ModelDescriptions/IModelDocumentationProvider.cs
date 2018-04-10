@@ -1,7 +1,7 @@
 using System;
 using System.Reflection;
 
-namespace Immedia_Picture_API.Areas.HelpPage.ModelDescriptions
+namespace Immedia.Picture.Api.Areas.HelpPage.ModelDescriptions
 {
     public interface IModelDocumentationProvider
     {

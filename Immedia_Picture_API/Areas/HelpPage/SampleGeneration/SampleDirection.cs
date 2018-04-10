@@ -1,4 +1,4 @@
-namespace Immedia_Picture_API.Areas.HelpPage
+namespace Immedia.Picture.Api.Areas.HelpPage
 {
     /// <summary>
     /// Indicates whether the sample is used for request or response

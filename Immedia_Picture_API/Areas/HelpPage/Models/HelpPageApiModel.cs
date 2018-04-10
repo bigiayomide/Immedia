@@ -2,9 +2,9 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Net.Http.Headers;
 using System.Web.Http.Description;
-using Immedia_Picture_API.Areas.HelpPage.ModelDescriptions;
+using Immedia.Picture.Api.Areas.HelpPage.ModelDescriptions;
 
-namespace Immedia_Picture_API.Areas.HelpPage.Models
+namespace Immedia.Picture.Api.Areas.HelpPage.Models
 {
     /// <summary>
     /// The model that represents an API displayed on the help page.

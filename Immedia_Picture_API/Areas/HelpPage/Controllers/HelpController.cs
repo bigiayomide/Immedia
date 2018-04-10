@@ -1,10 +1,10 @@
 using System;
 using System.Web.Http;
 using System.Web.Mvc;
-using Immedia_Picture_API.Areas.HelpPage.ModelDescriptions;
-using Immedia_Picture_API.Areas.HelpPage.Models;
+using Immedia.Picture.Api.Areas.HelpPage.ModelDescriptions;
+using Immedia.Picture.Api.Areas.HelpPage.Models;
 
-namespace Immedia_Picture_API.Areas.HelpPage.Controllers
+namespace Immedia.Picture.Api.Areas.HelpPage.Controllers
 {
     /// <summary>
     /// The controller that will handle requests for the help page.

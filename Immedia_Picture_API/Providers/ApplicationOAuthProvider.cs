@@ -9,9 +9,9 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
-using Immedia_Picture_API.Models;
+using Immedia.Picture.Api.Models;
 
-namespace Immedia_Picture_API.Providers
+namespace Immedia.Picture.Api.Providers
 {
     public class ApplicationOAuthProvider : OAuthAuthorizationServerProvider
     {

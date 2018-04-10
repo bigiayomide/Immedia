@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Immedia_Picture_API.Controllers
+namespace Immedia.Picture.Api.Controllers
 {
     public class HomeController : Controller
     {

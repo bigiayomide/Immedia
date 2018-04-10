@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 
-namespace Immedia_Picture_API
+namespace Immedia.Picture.Api
 {
     public class RouteConfig
     {

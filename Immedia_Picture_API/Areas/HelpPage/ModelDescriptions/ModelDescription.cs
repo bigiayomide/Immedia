@@ -1,6 +1,6 @@
 using System;
 
-namespace Immedia_Picture_API.Areas.HelpPage.ModelDescriptions
+namespace Immedia.Picture.Api.Areas.HelpPage.ModelDescriptions
 {
     /// <summary>
     /// Describes a type model.

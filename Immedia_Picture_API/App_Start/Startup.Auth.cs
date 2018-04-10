@@ -8,10 +8,10 @@ using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Microsoft.Owin.Security.OAuth;
 using Owin;
-using Immedia_Picture_API.Providers;
-using Immedia_Picture_API.Models;
+using Immedia.Picture.Api.Providers;
+using Immedia.Picture.Api.Models;
 
-namespace Immedia_Picture_API
+namespace Immedia.Picture.Api
 {
     public partial class Startup
     {

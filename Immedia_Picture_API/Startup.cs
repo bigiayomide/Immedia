@@ -4,9 +4,9 @@ using System.Linq;
 using Microsoft.Owin;
 using Owin;
 
-[assembly: OwinStartup(typeof(Immedia_Picture_API.Startup))]
+[assembly: OwinStartup(typeof(Immedia.Picture.Api.Startup))]
 
-namespace Immedia_Picture_API
+namespace Immedia.Picture.Api
 {
     public partial class Startup
     {

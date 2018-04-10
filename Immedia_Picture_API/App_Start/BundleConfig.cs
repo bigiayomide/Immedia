@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Optimization;
 
-namespace Immedia_Picture_API
+namespace Immedia.Picture.Api
 {
     public class BundleConfig
     {

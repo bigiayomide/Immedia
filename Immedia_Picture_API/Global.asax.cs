@@ -7,7 +7,7 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 
-namespace Immedia_Picture_API
+namespace Immedia.Picture.Api
 {
     public class WebApiApplication : System.Web.HttpApplication
     {

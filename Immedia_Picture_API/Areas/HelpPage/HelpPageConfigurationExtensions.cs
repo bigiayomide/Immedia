@@ -11,10 +11,10 @@ using System.Net.Http.Headers;
 using System.Web.Http;
 using System.Web.Http.Controllers;
 using System.Web.Http.Description;
-using Immedia_Picture_API.Areas.HelpPage.ModelDescriptions;
-using Immedia_Picture_API.Areas.HelpPage.Models;
+using Immedia.Picture.Api.Areas.HelpPage.ModelDescriptions;
+using Immedia.Picture.Api.Areas.HelpPage.Models;
 
-namespace Immedia_Picture_API.Areas.HelpPage
+namespace Immedia.Picture.Api.Areas.HelpPage
 {
     public static class HelpPageConfigurationExtensions
     {

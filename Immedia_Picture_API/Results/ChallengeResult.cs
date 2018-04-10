@@ -7,7 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Http;
 
-namespace Immedia_Picture_API.Results
+namespace Immedia.Picture.Api.Results
 {
     public class ChallengeResult : IHttpActionResult
     {

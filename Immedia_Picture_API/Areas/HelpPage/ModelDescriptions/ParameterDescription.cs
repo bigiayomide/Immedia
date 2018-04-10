@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
-namespace Immedia_Picture_API.Areas.HelpPage.ModelDescriptions
+namespace Immedia.Picture.Api.Areas.HelpPage.ModelDescriptions
 {
     public class ParameterDescription
     {
