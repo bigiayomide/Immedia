@@ -1,8 +1,10 @@
 ﻿body {
     padding-top: 50px;
-    padding-bottom: 20px;
-}
 
+}
+html,body{
+    height:100%
+}
 /* Set padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;
@@ -16,78 +18,68 @@ textarea {
     max-width: 280px;
 }
 
-.is-table-row {
-    display: table;
+.fill{
+
+    min-height:100%;
+    height:100%;
 }
 
-    .is-table-row [class*="col-"] {
-        float: none;
-        display: table-cell;
-        vertical-align: top;
-        background-color: aqua;
-    }
+.fill-height-left{
+    height:100%;
+    min-height:100%;
+    background-color: deepskyblue;
+        box-shadow: 2px -1px 11px 0px;
+}
+.fill-height-content{
+    height:100%;
+    min-height:100%;
+    padding-top: 20px;
 
-.row-full {
-    height: 100vw;
+}
+
+.image-div {
     position: relative;
-    margin-left: 58vw;
-    right: 100%;
-}
-.main-sidebar {
-    position: absolute;
-    top: 0;
-    left: 0;
-    padding-top: 50px;
-    min-height: 100%;
-    width: 230px;
-    z-index: 810;
-    -webkit-transition: -webkit-transform .3s ease-in-out,width .3s ease-in-out;
-    -moz-transition: -moz-transform .3s ease-in-out,width .3s ease-in-out;
-    -o-transition: -o-transform .3s ease-in-out,width .3s ease-in-out;
-    transition: transform .3s ease-in-out,width .3s ease-in-out;
+    width: 33.3333%;
 }
 
-.sidebar {
-    margin-top: 0;
-    padding-top: 0 !important;
-    height: auto;
-    padding-bottom: 10px;
+.image {
+  opacity: 1;
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: .5s ease;
+  backface-visibility: hidden;
 }
 
-.sidebar-menu, .main-sidebar .user-panel, .sidebar-menu > li.header {
-    white-space: nowrap;
-    overflow: hidden;
+.middle {
+  transition: .5s ease;
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  text-align: center;
 }
 
-.sidebar-menu {
-    list-style: none;
-    margin: 0;
-    padding: 0;
+.image-div:hover .image {
+  opacity: 0.3;
 }
 
-    .sidebar-menu > li {
-        position: relative;
-        margin: 0;
-        padding: 0;
-        display: block;
-    }
-
-.skin-blue .sidebar-menu > li.header {
-    color: #4b646f;
-    background: #1a2226;
+.image-div:hover .middle {
+  opacity: 1;
 }
 
-.sidebar-form, .sidebar-menu > li.header {
-    overflow: hidden;
-    text-overflow: clip;
+.text {
+    background-color: #4CAF50;
+    color: white;
+    font-size: 16px;
+    padding: 11px 4px;
+    margin-top: 5px;
+    display: inline;
 }
 
-.sidebar-menu, .main-sidebar .user-panel, .sidebar-menu > li.header {
-    white-space: nowrap;
-    overflow: hidden;
+.btn-inline {
+    display: inline;
+    margin-right: 3px;
 }
-
-    .sidebar-menu li.header {
-        padding: 10px 25px 10px 15px;
-        font-size: 12px;
-    }
