@@ -1,8 +1,10 @@
 ﻿body {
     padding-top: 50px;
-    padding-bottom: 20px;
-}
 
+}
+html,body{
+    height:100%
+}
 /* Set padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;
@@ -14,4 +16,70 @@ input,
 select,
 textarea {
     max-width: 280px;
+}
+
+.fill{
+
+    min-height:100%;
+    height:100%;
+}
+
+.fill-height-left{
+    height:100%;
+    min-height:100%;
+    background-color: deepskyblue;
+        box-shadow: 2px -1px 11px 0px;
+}
+.fill-height-content{
+    height:100%;
+    min-height:100%;
+    padding-top: 20px;
+
+}
+
+.image-div {
+    position: relative;
+    width: 33.3333%;
+}
+
+.image {
+  opacity: 1;
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: .5s ease;
+  backface-visibility: hidden;
+}
+
+.middle {
+  transition: .5s ease;
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.image-div:hover .image {
+  opacity: 0.3;
+}
+
+.image-div:hover .middle {
+  opacity: 1;
+}
+
+.text {
+    background-color: #4CAF50;
+    color: white;
+    font-size: 16px;
+    padding: 11px 4px;
+    margin-top: 5px;
+    display: inline;
+}
+
+.btn-inline {
+    display: inline;
+    margin-right: 3px;
 }
