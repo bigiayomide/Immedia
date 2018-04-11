@@ -50,6 +50,8 @@
     <Compile Include="APICredentials.cs" />
     <Compile Include="ApiRequest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="FlikrRequest.cs" />
+    <Compile Include="Requests\Photo.cs" />
     <Compile Include="Requests\RequestBase.cs" />
     <Compile Include="Requests\SearchRequest.cs" />
   </ItemGroup>

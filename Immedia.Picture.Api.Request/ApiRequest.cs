@@ -14,16 +14,15 @@ namespace Immedia.Picture.Api.Request
         private readonly string _apiKey;
         private readonly IRestClient _client;
 
-        public SearchRequest CustomerRequest { get { return new SearchRequest(_client, _apiKey); } }
+        public SearchRequest SearchRequest { get { return new SearchRequest(_client, _apiKey); } }
 
-        public ApiRequest(string username, string password, string apiKey, int companyId)
+        public ApiRequest(string apiKey)
         {
             _apiKey = apiKey;
 
             _client = new RestClient
             {
-                BaseUrl = new Uri("https://api.foursquare.com/v2/venues/"),
-                Authenticator = new HttpBasicAuthenticator(username, password)
+                BaseUrl = new Uri("https://api.flickr.com/services/rest/?method=flickr.photos.search&format=json&nojsoncallback=1"),
             };
         }
     }

@@ -18,11 +18,26 @@ namespace Immedia.Picture.Api
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js",
+                      "~/Scripts/Custom/loginsignup.js",
                       "~/Scripts/respond.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
+                      "~/Content/loginsignup.css",
                       "~/Content/site.css"));
+
+            bundles.Add(new ScriptBundle("~/bundles/app").Include(
+                      "~/Scripts/knockout-{version}.js",
+                      "~/Scripts/app.js"));
+
+            // Set EnableOptimizations to false for debugging. For more information,
+            // visit http://go.microsoft.com/fwlink/?LinkId=301862
+
+#if DEBUG
+            BundleTable.EnableOptimizations = false;
+#else
+             BundleTable.EnableOptimizations = true;
+#endif
         }
     }
 }

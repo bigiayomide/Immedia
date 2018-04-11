@@ -9,17 +9,10 @@ namespace Immedia.Picture.Api.Request
     public class ApiCredentials
     {
         public ApiRequest Api;
-
-        public string Username { get; } = "leonjvre@gmail.com";
-        public string Password { get; } = "Tatss101!";
-
-        public string Apikey { get; } = "{5AD9D7AA-4C22-4E92-9E93-0E9490CF7980}";
-
-        public int CompanyId { get; } = 284796;
-
+        public string Apikey { get; } = "015f6549349d226bd35da23bef97436f";
         public void Init()
         {
-            Api = new ApiRequest(Username, Password, Apikey, CompanyId);
+            Api = new ApiRequest( Apikey);
         }
     }
 }
