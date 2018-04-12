@@ -9,7 +9,7 @@ using Microsoft.Owin.Security.Google;
 using Microsoft.Owin.Security.OAuth;
 using Owin;
 using Immedia.Picture.Api.Providers;
-using Immedia.Picture.Api.Models;
+using Immedia.Picture.Data;
 
 namespace Immedia.Picture.Api
 {

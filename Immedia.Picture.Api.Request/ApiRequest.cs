@@ -22,7 +22,8 @@ namespace Immedia.Picture.Api.Request
 
             _client = new RestClient
             {
-                BaseUrl = new Uri("https://api.flickr.com/services/rest/?method=flickr.photos.search&format=json&nojsoncallback=1"),
+                BaseUrl = new Uri("https://api.flickr.com/services/rest"),
+                 
             };
         }
     }

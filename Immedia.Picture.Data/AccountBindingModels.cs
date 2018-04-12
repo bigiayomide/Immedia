@@ -1,8 +1,8 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using Newtonsoft.Json;
 
-namespace Immedia.Picture.Api.Models
+
+namespace Immedia.Picture.Data
 {
     // Models used as parameters to AccountController actions.
 

@@ -6,16 +6,17 @@ using System.Security.Cryptography;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
-using System.Web.Http.ModelBinding;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
-using Immedia.Picture.Api.Models;
+
 using Immedia.Picture.Api.Providers;
 using Immedia.Picture.Api.Results;
+using Immedia.Picture.Data;
+using System.Runtime.Serialization;
 
 namespace Immedia.Picture.Api.Controllers
 {
@@ -29,7 +30,6 @@ namespace Immedia.Picture.Api.Controllers
         public AccountController()
         {
         }
-
         public AccountController(ApplicationUserManager userManager,
             ISecureDataFormat<AuthenticationTicket> accessTokenFormat)
         {

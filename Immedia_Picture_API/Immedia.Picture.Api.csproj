@@ -229,15 +229,13 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PictureController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Custom Attributes\RequireHttpsAttribute.cs" />
     <Compile Include="Filters\RequireHttpsAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\AccountBindingModels.cs" />
-    <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
@@ -312,6 +310,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Picture\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -326,9 +325,17 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Immedia.Picture.Api.Request.Interface\Immedia.Picture.Api.Request.Interface.csproj">
+      <Project>{616BE5AF-C45D-478A-BD26-62D0C5E26998}</Project>
+      <Name>Immedia.Picture.Api.Request.Interface</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Immedia.Picture.Api.Request\Immedia.Picture.Api.Request.csproj">
       <Project>{BFA513D4-6A31-4768-B972-61B0CFA6DA21}</Project>
       <Name>Immedia.Picture.Api.Request</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Immedia.Picture.Data\Immedia.Picture.Data.csproj">
+      <Project>{C26EC760-F612-4B27-8248-4409377C9B6E}</Project>
+      <Name>Immedia.Picture.Data</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Immedia.Picture.Api.Models
+namespace Immedia.Picture.Data
 {
     // Models returned by AccountController actions.
 

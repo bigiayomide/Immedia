@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Web.Http;
 
 namespace Immedia.Picture.Api.Request
 {
-    public class ApiCredentials
+    public class PictureApiController: ApiController
     {
         public ApiRequest Api;
-        public string Apikey { get; } = "015f6549349d226bd35da23bef97436f";
+        public string Apikey { get; } = "7e40b74b14e4b62ddd2cadb193d646ed";
         public void Init()
         {
             Api = new ApiRequest( Apikey);

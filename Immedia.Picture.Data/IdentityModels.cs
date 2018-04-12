@@ -1,14 +1,18 @@
-﻿using System.Security.Claims;
+﻿using System.Collections.Generic;
+using System.Data.Entity;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using Immedia.Picture.Api.Request.Requests;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
-using Microsoft.AspNet.Identity.Owin;
 
-namespace Immedia.Picture.Api.Models
+
+namespace Immedia.Picture.Data
 {
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit https://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
     public class ApplicationUser : IdentityUser
     {
+        public List<Photo> photos { get; set; }
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager, string authenticationType)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
@@ -24,7 +28,6 @@ namespace Immedia.Picture.Api.Models
             : base("DefaultConnection", throwIfV1Schema: false)
         {
         }
-        
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();
