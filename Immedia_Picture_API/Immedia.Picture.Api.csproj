@@ -250,7 +250,6 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Scripts\app.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\HelpPage\Views\Web.config" />
@@ -275,8 +274,10 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Scripts\Custom\loginmodel.js" />
     <Content Include="Scripts\Custom\loginsignup.js" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="Scripts\Custom\picturemodel.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
@@ -334,6 +335,10 @@
       <Project>{77B2A10A-9776-4B4A-B197-363933B65504}</Project>
       <Name>Immedia.Picture.Api.Core.Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Immedia.Picture.Api.Core.Contracts\Immedia.Picture.Api.Core.Contracts.csproj">
+      <Project>{2C33DCA7-62EF-457B-A6D9-7ABA0F1BB56F}</Project>
+      <Name>Immedia.Picture.Api.Core.Contracts</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Immedia.Picture.Api.Entities\Immedia.Picture.Api.Entities.csproj">
       <Project>{B89140C2-D2E2-455D-AC4B-27F784294457}</Project>
       <Name>Immedia.Picture.Api.Entities</Name>
@@ -345,6 +350,10 @@
     <ProjectReference Include="..\Immedia.Picture.Api.Request\Immedia.Picture.Api.Request.csproj">
       <Project>{BFA513D4-6A31-4768-B972-61B0CFA6DA21}</Project>
       <Name>Immedia.Picture.Api.Request</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Immedia.Picture.Data.Interface\Immedia.Picture.Data.Interface.csproj">
+      <Project>{A74AABC7-106F-48CB-8E55-508197B55A9F}</Project>
+      <Name>Immedia.Picture.Data.Interface</Name>
     </ProjectReference>
     <ProjectReference Include="..\Immedia.Picture.Data\Immedia.Picture.Data.csproj">
       <Project>{C26EC760-F612-4B27-8248-4409377C9B6E}</Project>

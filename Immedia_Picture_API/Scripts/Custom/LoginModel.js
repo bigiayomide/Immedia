@@ -23,8 +23,7 @@
             if (response.Message) self.errors.push(response.Message);
             if (response.ModelState) {
                 var modelState = response.ModelState;
-                for (var prop in modelState)
-                {
+                for (var prop in modelState) {
                     if (modelState.hasOwnProperty(prop)) {
                         var msgArr = modelState[prop]; // expect array here
                         if (msgArr.length) {
@@ -133,8 +132,8 @@
             headers: headers,
             data:
         }).done(function (data) {
-            self.result(data);
-        }).fail(showError);
+                self.result(data);
+            }).fail(showError);
     }
 }
 
