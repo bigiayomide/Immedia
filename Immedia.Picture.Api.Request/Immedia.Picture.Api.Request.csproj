@@ -72,6 +72,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Immedia.Picture.Api.Entities\Immedia.Picture.Api.Entities.csproj">
+      <Project>{B89140C2-D2E2-455D-AC4B-27F784294457}</Project>
+      <Name>Immedia.Picture.Api.Entities</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Immedia.Picture.Api.Request.Interface\Immedia.Picture.Api.Request.Interface.csproj">
       <Project>{616BE5AF-C45D-478A-BD26-62D0C5E26998}</Project>
       <Name>Immedia.Picture.Api.Request.Interface</Name>

@@ -31,6 +31,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -40,12 +41,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BusinessEngine.cs" />
+    <Compile Include="IBusinessEngineFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Immedia.Picture.Api.Core.Contracts\Immedia.Picture.Api.Core.Contracts.csproj">
+      <Project>{2C33DCA7-62EF-457B-A6D9-7ABA0F1BB56F}</Project>
+      <Name>Immedia.Picture.Api.Core.Contracts</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Immedia.Picture.Api.Request\Immedia.Picture.Api.Request.csproj">
       <Project>{BFA513D4-6A31-4768-B972-61B0CFA6DA21}</Project>
       <Name>Immedia.Picture.Api.Request</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Immedia.Picture.Business.Interface\Immedia.Picture.Business.Interface.csproj">
+      <Project>{2A952A71-1B91-48D9-935B-3A504FB2A2FD}</Project>
+      <Name>Immedia.Picture.Business.Interface</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

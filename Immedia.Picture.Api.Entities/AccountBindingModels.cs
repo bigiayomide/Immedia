@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 
 
-namespace Immedia.Picture.Data
+namespace Immedia.Picture.Api.Entities
 {
     // Models used as parameters to AccountController actions.
 

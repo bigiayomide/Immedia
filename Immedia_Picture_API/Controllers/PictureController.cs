@@ -1,4 +1,5 @@
-﻿using Immedia.Picture.Api.Request;
+﻿using Immedia.Picture.Api.Entities;
+using Immedia.Picture.Api.Request;
 using Immedia.Picture.Api.Request.Requests;
 using Immedia.Picture.Data;
 using System.Threading.Tasks;

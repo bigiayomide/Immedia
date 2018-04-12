@@ -17,6 +17,7 @@ using Immedia.Picture.Api.Providers;
 using Immedia.Picture.Api.Results;
 using Immedia.Picture.Data;
 using System.Runtime.Serialization;
+using Immedia.Picture.Api.Entities;
 
 namespace Immedia.Picture.Api.Controllers
 {

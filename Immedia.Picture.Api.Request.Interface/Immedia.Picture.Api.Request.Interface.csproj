@@ -44,6 +44,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Immedia.Picture.Api.Entities\Immedia.Picture.Api.Entities.csproj">
+      <Project>{B89140C2-D2E2-455D-AC4B-27F784294457}</Project>
+      <Name>Immedia.Picture.Api.Entities</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Immedia.Picture.Data\Immedia.Picture.Data.csproj">
       <Project>{C26EC760-F612-4B27-8248-4409377C9B6E}</Project>
       <Name>Immedia.Picture.Data</Name>

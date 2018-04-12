@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Immedia.Picture.Api.Entities;
 using Immedia.Picture.Api.Request.Requests;
 using Immedia.Picture.Data;
 using Microsoft.VisualStudio.TestTools.UnitTesting;

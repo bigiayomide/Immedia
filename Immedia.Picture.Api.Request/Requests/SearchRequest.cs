@@ -1,4 +1,5 @@
-﻿using Immedia.Picture.Data;
+﻿using Immedia.Picture.Api.Entities;
+using Immedia.Picture.Data;
 using RestSharp;
 using System;
 using System.Collections.Generic;

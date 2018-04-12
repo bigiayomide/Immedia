@@ -5,6 +5,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 
 using Immedia.Picture.Data;
+using Immedia.Picture.Api.Entities;
 
 namespace Immedia.Picture.Api
 {

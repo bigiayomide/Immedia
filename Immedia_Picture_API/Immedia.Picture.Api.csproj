@@ -51,6 +51,7 @@
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web.Entity" />
@@ -325,6 +326,18 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Immedia.Picture.Api.Bootstraper\Immedia.Picture.Api.Bootstraper.csproj">
+      <Project>{9AE1621C-895A-43C8-BF32-030F5A1C26B5}</Project>
+      <Name>Immedia.Picture.Api.Bootstraper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Immedia.Picture.Api.Core.Common\Immedia.Picture.Api.Core.Common.csproj">
+      <Project>{77B2A10A-9776-4B4A-B197-363933B65504}</Project>
+      <Name>Immedia.Picture.Api.Core.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Immedia.Picture.Api.Entities\Immedia.Picture.Api.Entities.csproj">
+      <Project>{B89140C2-D2E2-455D-AC4B-27F784294457}</Project>
+      <Name>Immedia.Picture.Api.Entities</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Immedia.Picture.Api.Request.Interface\Immedia.Picture.Api.Request.Interface.csproj">
       <Project>{616BE5AF-C45D-478A-BD26-62D0C5E26998}</Project>
       <Name>Immedia.Picture.Api.Request.Interface</Name>

@@ -10,6 +10,7 @@ using Microsoft.Owin.Security.OAuth;
 using Owin;
 using Immedia.Picture.Api.Providers;
 using Immedia.Picture.Data;
+using Immedia.Picture.Api.Entities;
 
 namespace Immedia.Picture.Api
 {

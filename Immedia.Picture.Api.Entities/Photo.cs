@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.Serialization;
 using System.Xml.Serialization;
 
-namespace Immedia.Picture.Api.Request.Requests
+namespace Immedia.Picture.Api.Entities
 {
     public class Photo
     {
@@ -26,6 +26,8 @@ namespace Immedia.Picture.Api.Request.Requests
                 return string.Format("http://farm{0}.static.flickr.com/{1}/{2}_{3}.jpg", Farm, Server, Id, Secret);
             }
         }
+
+        public virtual List<ApplicationUser> User { get; set; }
     }
 
     public class Result
