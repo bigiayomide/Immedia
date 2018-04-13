@@ -51,7 +51,7 @@
       <Name>Immedia.Picture.Api.Core.Contracts</Name>
     </ProjectReference>
     <ProjectReference Include="..\Immedia.Picture.Business\Immedia.Picture.Business.csproj">
-      <Project>{396A9330-0249-4C3A-998A-8D7F5C3B4A3B}</Project>
+      <Project>{396a9330-0249-4c3a-998a-8d7f5c3b4a3b}</Project>
       <Name>Immedia.Picture.Business</Name>
     </ProjectReference>
     <ProjectReference Include="..\Immedia.Picture.Data\Immedia.Picture.Data.csproj">

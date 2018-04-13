@@ -58,7 +58,7 @@
         }).fail(showError);
     }
 
- function getPictures() {
+    self.getPictures= function()  {
         self.result('');
         self.errors.removeAll();
 
@@ -69,20 +69,18 @@
         };
 
         $.ajax({
-            type: 'POST',
-            url: 'api/Picture/GetLocationPicturesAsync',
-            async: true,
+            type: 'GET',
+            url: 'api/Picture/GetLocationPictures',
             data: data
         }).done(function (data) {
             self.result(data);
-            console.log(data);
+            
+            console.log(self.result());
             }).fail(showError);
     }
-    getPictures();
-
 
 }
 
 var app = new ViewModel();
-
+app.getPictures();
 ko.applyBindings(app);

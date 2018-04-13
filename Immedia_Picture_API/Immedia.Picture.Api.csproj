@@ -328,7 +328,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Immedia.Picture.Api.Bootstraper\Immedia.Picture.Api.Bootstraper.csproj">
-      <Project>{9AE1621C-895A-43C8-BF32-030F5A1C26B5}</Project>
+      <Project>{9ae1621c-895a-43c8-bf32-030f5a1c26b5}</Project>
       <Name>Immedia.Picture.Api.Bootstraper</Name>
     </ProjectReference>
     <ProjectReference Include="..\Immedia.Picture.Api.Core.Common\Immedia.Picture.Api.Core.Common.csproj">
@@ -348,7 +348,7 @@
       <Name>Immedia.Picture.Api.Request.Interface</Name>
     </ProjectReference>
     <ProjectReference Include="..\Immedia.Picture.Api.Request\Immedia.Picture.Api.Request.csproj">
-      <Project>{BFA513D4-6A31-4768-B972-61B0CFA6DA21}</Project>
+      <Project>{bfa513d4-6a31-4768-b972-61b0cfa6da21}</Project>
       <Name>Immedia.Picture.Api.Request</Name>
     </ProjectReference>
     <ProjectReference Include="..\Immedia.Picture.Data.Interface\Immedia.Picture.Data.Interface.csproj">

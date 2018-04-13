@@ -10,16 +10,18 @@
     </p>
     <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301870">Learn more &raquo;</a></p>
 </div>
-<div class="col-md-9 fill-height-content">
-    <div class="col-md-3 image-div">
-        <img src="https://as.ftcdn.net/r/v1/pics/33a88d84179a9a66f91b15a398f157f3fa6c7e3c/landing/images_vectors.jpg" alt="Avatar" class="image" style="width:100%">
-        <div class="middle">
-            <a href="#" class="btn btn-success btn-sm btn-inline">
-                <span class="glyphicon glyphicon-save"></span> Save
-            </a>
-            <a href="#" class="btn btn-success btn-sm btn-inline">
-                <span class="glyphicon glyphicon-star-empty"></span> Fav
-            </a>
+<div data-bind="foreach: result">
+    <div data-bind="foreach:Photos" class="col-md-9 fill-height-content">
+        <div class="col-md-3 image-div">
+            <img data-bind="attr:{src: ImgUrl}" alt="Avatar" class=" img-responsive" style="height:200px; width:240px">
+            <div class="middle">
+                <a href="#" class="btn btn-success btn-sm btn-inline">
+                    <span class="glyphicon glyphicon-save"></span> Save
+                </a>
+                <a href="#" class="btn btn-success btn-sm btn-inline">
+                    <span class="glyphicon glyphicon-star-empty"></span> Fav
+                </a>
+            </div>
         </div>
     </div>
 </div>

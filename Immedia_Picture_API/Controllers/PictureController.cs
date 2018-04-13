@@ -13,6 +13,7 @@ using System.Web.Http;
 
 namespace Immedia_Picture_API.Controllers
 {
+    [RoutePrefix("api/Picture")]
     public class PictureController : PictureApiController
     {
         ISearchRequest _searchRequest;
@@ -21,12 +22,12 @@ namespace Immedia_Picture_API.Controllers
             Init();
             _searchRequest = Api.SearchRequest;
         }
-        // GET: Picture
-        [Route("api/Pictures/GetLocationPicturesAsync")]
-        [HttpPost]
-        public async Task<IHttpActionResult> GetLocationPicturesAsync(string lon, string lat, int? page)
+
+
+        [Route("GetLocationPictures")]
+        public async  Task<IHttpActionResult> GetLocationPicturesAsync(string lon, string lat, int? page)
         {
-            System.Diagnostics.Debugger.Break();
+
             try
             {
                 Result result = await _searchRequest.GetPhotosforLocationAsync(lat, lon, page.Value);
@@ -37,7 +38,7 @@ namespace Immedia_Picture_API.Controllers
                 }
                 else
                 {
-                    System.Diagnostics.Debugger.Break();
+                    
                     return Content(HttpStatusCode.InternalServerError, result);
                 }
             }
