@@ -2,19 +2,28 @@
     var self = this;
 
     var tokenKey = 'accessToken';
+    var longitude = "";
+    var latitude = "";
+
+
+    $.get("https://api.ipdata.co", function (response) {
+        longitude = response.longitude;
+        latitude = response.latitude;
+    });
+
 
     self.result = ko.observable();
     self.user = ko.observable();
 
-    self.longitude = ko.observable();
-    self.latitude = ko.observable();
-    self.registerPassword2 = ko.observable();
-    self.page = ko.observable();
+    self.longitude = ko.observable(longitude);
+    self.latitude = ko.observable(latitude);
 
+    self.page = ko.observable();
 
     self.loginEmail = ko.observable();
     self.loginPassword = ko.observable();
     self.errors = ko.observableArray([]);
+
 
     function showError(jqXHR) {
 
@@ -58,25 +67,27 @@
         }).fail(showError);
     }
 
-    self.getPictures= function()  {
+    self.getPictures = function () {
+        
         self.result('');
         self.errors.removeAll();
 
-        var data = {
-            lon: "29.8587",
-            lat: "31.0218",
+        console.log(self.latitude());
+        var getdata = {
+            lon: longitude,
+            lat: latitude,
             page: 1
         };
 
         $.ajax({
             type: 'GET',
             url: 'api/Picture/GetLocationPictures',
-            data: data
+            data: getdata
         }).done(function (data) {
             self.result(data);
             
             console.log(self.result());
-            }).fail(showError);
+        }).fail(showError);
     }
 
 }

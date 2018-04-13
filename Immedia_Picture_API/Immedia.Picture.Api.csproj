@@ -352,6 +352,14 @@
       <Project>{bfa513d4-6a31-4768-b972-61b0cfa6da21}</Project>
       <Name>Immedia.Picture.Api.Request</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Immedia.Picture.Business.Interface\Immedia.Picture.Business.Interface.csproj">
+      <Project>{2A952A71-1B91-48D9-935B-3A504FB2A2FD}</Project>
+      <Name>Immedia.Picture.Business.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Immedia.Picture.Business\Immedia.Picture.Business.csproj">
+      <Project>{396A9330-0249-4C3A-998A-8D7F5C3B4A3B}</Project>
+      <Name>Immedia.Picture.Business</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Immedia.Picture.Data.Interface\Immedia.Picture.Data.Interface.csproj">
       <Project>{A74AABC7-106F-48CB-8E55-508197B55A9F}</Project>
       <Name>Immedia.Picture.Data.Interface</Name>

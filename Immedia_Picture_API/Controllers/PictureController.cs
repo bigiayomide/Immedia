@@ -2,6 +2,8 @@
 using Immedia.Picture.Api.Entities;
 using Immedia.Picture.Api.Request;
 using Immedia.Picture.Api.Request.Requests;
+using Immedia.Picture.Business;
+using Immedia.Picture.Business.Interface;
 using Immedia.Picture.Data;
 using Immedia.Picture.Data.Interface;
 using Immedia.Picture.Data.Repository;
@@ -14,62 +16,65 @@ using System.Web.Http;
 namespace Immedia_Picture_API.Controllers
 {
     [RoutePrefix("api/Picture")]
-    public class PictureController : PictureApiController
+    public class PictureController : ApiController
     {
-        ISearchRequest _searchRequest;
-        public PictureController()
+        [ImportingConstructor]
+        public PictureController(IBusinessEngineFactory BusinessRepositoryFactory)
         {
-            Init();
-            _searchRequest = Api.SearchRequest;
+            _BusinessRepositoryFactory = BusinessRepositoryFactory;
         }
 
+        IBusinessEngineFactory _BusinessRepositoryFactory;
 
         [Route("GetLocationPictures")]
-        public async  Task<IHttpActionResult> GetLocationPicturesAsync(string lon, string lat, int? page)
+        public async  Task<IHttpActionResult> GetLonLatPictures(Place place,int? page)
         {
-
             try
             {
-                Result result = await _searchRequest.GetPhotosforLocationAsync(lat, lon, page.Value);
-                if (result != null)
-                {
-                    //_IUserRepository = _IDataRepositoryFactory.GetDataRepository<IUserRepository>();
-                    return Content(HttpStatusCode.OK, result);
-                }
-                else
-                {
-                    
-                    return Content(HttpStatusCode.InternalServerError, result);
-                }
+                IBusinessEngine business =  _BusinessRepositoryFactory.GetBusinessEngine<IBusinessEngine>();
+                return Content(HttpStatusCode.OK, await business.GetLocationPictureLatLonAsync(place, page.Value));
             }
             catch (Exception ex)
             {
                 return Content(HttpStatusCode.InternalServerError, ex.Message);
-
             }
-
         }
 
-
-        [Import]
-        IDataRepositoryFactory _IDataRepositoryFactory;
-        IUserRepository _IUserRepository;
-        public IHttpActionResult SavePictureforUser(string Userid, Photo photo)
+        public IHttpActionResult SavePictureforUser(string userid, Photo photo)
         {
             try
             {
-                if (!string.IsNullOrEmpty(Userid) && photo != null)
-                {
-                    _IUserRepository = _IDataRepositoryFactory.GetDataRepository<IUserRepository>();
-                    _IUserRepository.SavePictureForUser(photo, Userid);
-                    return Ok();
-                }
-                else
-                    return NotFound();
+                IBusinessEngine business = _BusinessRepositoryFactory.GetBusinessEngine<IBusinessEngine>();
+                business.SavePictureforUser(userid, photo);
+                return Ok();
             }
             catch(Exception ex)
             {
-                return Ok(ex.Message);
+                return Content(HttpStatusCode.InternalServerError,ex.Message);
+            }
+        }
+        public IHttpActionResult Getlocations(string query)
+        {
+            try
+            {
+                IBusinessEngine business =   _BusinessRepositoryFactory.GetBusinessEngine<IBusinessEngine>();
+                return Content(HttpStatusCode.InternalServerError,  business.Getlocations(query));
+            }
+            catch (Exception ex)
+            {
+                return Content(HttpStatusCode.InternalServerError, ex.Message);
+            }
+        }
+        public IHttpActionResult GetPictureDetails(int Id )
+        {
+            try
+            {
+                IBusinessEngine business = _BusinessRepositoryFactory.GetBusinessEngine<IBusinessEngine>();
+                return Content(HttpStatusCode.InternalServerError, business.GetPictureDetails(Id));
+            }
+            catch (Exception ex)
+            {
+                return Content(HttpStatusCode.InternalServerError, ex.Message);
             }
         }
     }

@@ -11,7 +11,8 @@ namespace Immedia.Picture.Api.Entities
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit https://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
     public class ApplicationUser : IdentityUser
     {
-        public virtual List<Photo> photos { get; set; }
+        public virtual List<Photo> Photos { get; set; }
+        public virtual List<Place> Places { get; set; }
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager, string authenticationType)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
@@ -27,6 +28,8 @@ namespace Immedia.Picture.Api.Entities
             : base("DefaultConnection", throwIfV1Schema: false)
         {
         }
+        public DbSet<Place> Places { get; set; }
+        public DbSet<Photo> Photos { get; set; }
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();

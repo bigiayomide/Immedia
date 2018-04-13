@@ -1,4 +1,5 @@
 ﻿using Immedia.Picture.Api.Entities;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Immedia.Picture.Data
@@ -20,5 +21,8 @@ namespace Immedia.Picture.Data
         /// <param name="id">Id of the photo</param>
         /// <returns>A Photo</returns>
         Task<Photo> GetPhotoDetailsAsync(int id);
+
+
+        Task<List<Place>> GetLocationquery(string query);
     }
 }

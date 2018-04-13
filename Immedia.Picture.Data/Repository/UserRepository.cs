@@ -58,7 +58,8 @@ namespace Immedia.Picture.Data.Repository
             using (ApplicationDbContext entityContext = new ApplicationDbContext())
             {
                 ApplicationUser user = GetEntity(entityContext, id);
-                user.photos.Add(photo);
+                user.Photos.Add(photo);
+                entityContext.SaveChanges();
             }
         }
         public void RemovePictureForUser(Photo photo, string id)
@@ -66,7 +67,18 @@ namespace Immedia.Picture.Data.Repository
             using (ApplicationDbContext entityContext = new ApplicationDbContext())
             {
                 ApplicationUser user = GetEntity(entityContext, id);
-                user.photos.Remove(photo);
+                user.Photos.Remove(photo);
+                entityContext.SaveChanges();
+            }
+        }
+
+        public void SaveUserLocation(string id, Place place)
+        {
+            using (ApplicationDbContext entityContext = new ApplicationDbContext())
+            {
+                ApplicationUser user = GetEntity(entityContext, id);
+                user.Places.Add(place);
+                entityContext.SaveChanges();
             }
         }
     }

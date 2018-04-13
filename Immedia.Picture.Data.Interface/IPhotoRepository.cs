@@ -8,10 +8,7 @@ using System.Threading.Tasks;
 
 namespace Immedia.Picture.Data.Interface
 {
-    public interface IUserRepository : IDataRepository<ApplicationUser>
+    public interface IPhotoRepository : IDataRepository<Photo>
     {
-        ApplicationUser GetByLogin(string email);
-        void SavePictureForUser(Photo photo, string id);
-        void SaveUserLocation(string id, Place place);
     }
 }

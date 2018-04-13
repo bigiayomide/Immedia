@@ -6,6 +6,7 @@
     self.result = ko.observable();
     self.user = ko.observable();
 
+
     self.registerEmail = ko.observable();
     self.registerPassword = ko.observable();
     self.registerPassword2 = ko.observable();
@@ -13,6 +14,8 @@
     self.loginEmail = ko.observable();
     self.loginPassword = ko.observable();
     self.errors = ko.observableArray([]);
+
+
 
     function showError(jqXHR) {
 
@@ -130,12 +133,13 @@
             type: 'POST',
             url: '/api/values',
             headers: headers,
-            data:
+            data:data
         }).done(function (data) {
                 self.result(data);
             }).fail(showError);
     }
 }
-
 var app = new ViewModel();
+
+
 ko.applyBindings(app);

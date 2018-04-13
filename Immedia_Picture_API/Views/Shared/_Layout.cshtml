@@ -101,35 +101,83 @@
         </div>
     </div>
 
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav ">
-                    <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, null)</li>
-                    <li>@Html.ActionLink("API", "Index", "Help", new { area = "" }, null)</li>
-                </ul>
+    <div class="wrapper">
+        <!-- Sidebar Holder -->
+        <nav id="sidebar" class="mCustomScrollbar _mCS_1 mCS-autoHide mCS_no_scrollbar" style="overflow: visible;">
+            <div id="mCSB_1" class="mCustomScrollBox mCS-minimal mCSB_vertical mCSB_outside" style="max-height: none;" tabindex="0">
+                <div id="mCSB_1_container" class="mCSB_container mCS_y_hidden mCS_no_scrollbar_y" style="position:relative; top:0; left:0;" dir="ltr">
+                    <div class="sidebar-header">
+                        <h3>Bootstrap Sidebar</h3>
+                    </div>
 
+                    <ul class="list-unstyled components">
+                        <p>Dummy Heading</p>
+                        <li class="active">
+                            <a href="https://bootstrapious.com/tutorial/sidebar/index2.html#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="collapsed">Home</a>
+                            <ul class="list-unstyled collapse" id="homeSubmenu" aria-expanded="false" style="height: 0px;">
+                                <li><a href="https://bootstrapious.com/tutorial/sidebar/index2.html#">Home 1</a></li>
+                                <li><a href="https://bootstrapious.com/tutorial/sidebar/index2.html#">Home 2</a></li>
+                                <li><a href="https://bootstrapious.com/tutorial/sidebar/index2.html#">Home 3</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="https://bootstrapious.com/tutorial/sidebar/index2.html#">About</a>
+                            <a href="https://bootstrapious.com/tutorial/sidebar/index2.html#pageSubmenu" data-toggle="collapse" aria-expanded="false">Pages</a>
+                            <ul class="collapse list-unstyled" id="pageSubmenu">
+                                <li><a href="https://bootstrapious.com/tutorial/sidebar/index2.html#">Page 1</a></li>
+                                <li><a href="https://bootstrapious.com/tutorial/sidebar/index2.html#">Page 2</a></li>
+                                <li><a href="https://bootstrapious.com/tutorial/sidebar/index2.html#">Page 3</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="https://bootstrapious.com/tutorial/sidebar/index2.html#">Portfolio</a>
+                        </li>
+                        <li>
+                            <a href="https://bootstrapious.com/tutorial/sidebar/index2.html#">Contact</a>
+                        </li>
+                    </ul>
+
+                    <ul class="list-unstyled CTAs">
+                        <li><a href="https://bootstrapious.com/tutorial/files/sidebar.zip" class="download">Download source</a></li>
+                        <li><a href="https://bootstrapious.com/p/bootstrap-sidebar" class="article">Back to article</a></li>
+                    </ul>
+                </div>
             </div>
-            <nav class="main-nav">
-                <ul>
-                    <li><a class="signin" href="#0">Sign in</a></li>
-                    <li><a class="signup" href="#0">Sign up</a></li>
-                </ul>
+            <div id="mCSB_1_scrollbar_vertical" class="mCSB_scrollTools mCSB_1_scrollbar mCS-minimal mCSB_scrollTools_vertical" style="display: none;"><div class="mCSB_draggerContainer"><div id="mCSB_1_dragger_vertical" class="mCSB_dragger" style="position: absolute; min-height: 50px; height: 0px; top: 0px; display: block; max-height: 641px;"><div class="mCSB_dragger_bar" style="line-height: 50px;"></div></div><div class="mCSB_draggerRail"></div></div></div>
+        </nav>
+
+        <!-- Page Content Holder -->
+        <div id="content" class="">
+            <nav class="navbar navbar-default" style="position:  fixed;left: 277px;right: 2px;top: 0;">
+                <div class="container-fluid">
+
+                    <div class="navbar-header">
+                        <button type="button" id="sidebarCollapse" class="btn btn-info navbar-btn">
+                            <i class="glyphicon glyphicon-align-left"></i>
+                            <span>Toggle Sidebar</span>
+                        </button>
+                    </div>
+                
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="https://bootstrapious.com/tutorial/sidebar/index2.html#">Page</a></li>
+                            <li><a href="https://bootstrapious.com/tutorial/sidebar/index2.html#">Page</a></li>
+                            <li><a href="https://bootstrapious.com/tutorial/sidebar/index2.html#">Page</a></li>
+                            <li><a href="https://bootstrapious.com/tutorial/sidebar/index2.html#">Page</a></li>
+                        </ul>
+                        <form class="navbar-form" id="search" role="search">
+                            <div class="form-group">
+                                <input type="text" id="searchbox" class="form-control" placeholder="Search">
+                            </div>
+                            <!-- <button type="submit" class="btn btn-default">Submit</button> -->
+                        </form>
+                    </div>
+                </div>
             </nav>
+            @RenderBody()
         </div>
     </div>
 
-    <div style="margin-top: -20px;" class="container-fluid  fill">
-        @RenderBody()
-    </div>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
