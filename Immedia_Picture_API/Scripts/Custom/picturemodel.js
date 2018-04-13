@@ -68,21 +68,28 @@
     }
 
     self.getPictures = function () {
-        
+
+        var token = sessionStorage.getItem(tokenKey);
+        var headers = {};
+        if (token) {
+            headers.Authorization = 'Bearer ' + token;
+        }
+
         self.result('');
         self.errors.removeAll();
 
         console.log(self.latitude());
+        var Page = { Name: "Ayomide" };
         var getdata = {
-            lon: longitude,
-            lat: latitude,
+            place: Page,
             page: 1
         };
 
         $.ajax({
             type: 'GET',
-            url: 'api/Picture/GetLocationPictures',
-            data: getdata
+            url: '/api/Picture/GetLocationPictures',
+            data: getdata,
+            headers: headers
         }).done(function (data) {
             self.result(data);
             

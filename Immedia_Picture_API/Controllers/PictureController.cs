@@ -16,16 +16,15 @@ using System.Web.Http;
 
 namespace Immedia_Picture_API.Controllers
 {
-    [Authorize]
+
     [RoutePrefix("api/Picture")]
     public class PictureController : ApiController
     {
-        [ImportingConstructor]
-        public PictureController(IBusinessEngineFactory BusinessRepositoryFactory)
-        {
-            _BusinessRepositoryFactory = BusinessRepositoryFactory;
-        }
 
+        public PictureController()
+        {
+        }
+        [Import]
         IBusinessEngineFactory _BusinessRepositoryFactory;
 
         [Route("GetLocationPictures")]
