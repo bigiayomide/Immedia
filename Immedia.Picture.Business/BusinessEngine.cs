@@ -46,11 +46,13 @@ namespace Immedia.Picture.Business
             return point;
         }
 
-        public async Task<Result> GetLocationPictureLatLonAsync(Place place,int? page)
+        public async Task<Result> GetLocationPictureLatLonAsync(Place place,int? page,string userId)
         {
             try
             {
                 Result result = await _searchRequest.GetPhotosforLocationAsync(place.Latitude, place.Longitude, page.Value);
+
+                _UserRepository.SaveUserLocation(userId, place);
                 _PlaceRepository.SavePlacePhoto(place.PlaceId, result.Photos);
                 if (result != null)
                 {

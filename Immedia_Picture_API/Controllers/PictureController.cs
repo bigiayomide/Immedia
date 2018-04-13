@@ -7,6 +7,7 @@ using Immedia.Picture.Business.Interface;
 using Immedia.Picture.Data;
 using Immedia.Picture.Data.Interface;
 using Immedia.Picture.Data.Repository;
+using Microsoft.AspNet.Identity;
 using System;
 using System.ComponentModel.Composition;
 using System.Net;
@@ -15,6 +16,7 @@ using System.Web.Http;
 
 namespace Immedia_Picture_API.Controllers
 {
+    [Authorize]
     [RoutePrefix("api/Picture")]
     public class PictureController : ApiController
     {
@@ -32,7 +34,7 @@ namespace Immedia_Picture_API.Controllers
             try
             {
                 IBusinessEngine business =  _BusinessRepositoryFactory.GetBusinessEngine<IBusinessEngine>();
-                return Content(HttpStatusCode.OK, await business.GetLocationPictureLatLonAsync(place, page.Value));
+                return Content(HttpStatusCode.OK, await business.GetLocationPictureLatLonAsync(place, page.Value, User.Identity.GetUserId()));
             }
             catch (Exception ex)
             {
