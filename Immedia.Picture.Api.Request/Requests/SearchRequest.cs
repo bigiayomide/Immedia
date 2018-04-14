@@ -42,5 +42,15 @@ namespace Immedia.Picture.Api.Request.Requests
             });
         }
 
+        public async Task<Place> GetLocationByLonLat(string lat, string lon)
+        {
+            return await Task.Run(() =>
+            {
+                RestRequest request = new RestRequest(string.Format("?method=flickr.places.findByLatLon&format=rest&api_key={0}&lat={1}&lon={2}&accuracy=11", _apiKey, lat,lon), Method.GET);
+                IRestResponse <Place> response = _client.Execute<Place>(request);
+                response.Data.Value=response.Data.Name;
+                return response.Data;
+            });
+        }
     }
 }

@@ -17,11 +17,24 @@ namespace Immedia.Picture.Api.Entities.Migrations
                         Secret = c.String(),
                         Server = c.String(),
                         Farm = c.String(),
-                        Place_PlaceId = c.String(maxLength: 128),
+                        place_PlaceId = c.String(maxLength: 128),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Places", t => t.Place_PlaceId)
-                .Index(t => t.Place_PlaceId);
+                .ForeignKey("dbo.Places", t => t.place_PlaceId)
+                .Index(t => t.place_PlaceId);
+            
+            CreateTable(
+                "dbo.Places",
+                c => new
+                    {
+                        PlaceId = c.String(nullable: false, maxLength: 128),
+                        WoeId = c.String(),
+                        Latitude = c.String(),
+                        Longitude = c.String(),
+                        Name = c.String(),
+                        Value = c.String(),
+                    })
+                .PrimaryKey(t => t.PlaceId);
             
             CreateTable(
                 "dbo.AspNetUsers",
@@ -69,18 +82,6 @@ namespace Immedia.Picture.Api.Entities.Migrations
                 .Index(t => t.UserId);
             
             CreateTable(
-                "dbo.Places",
-                c => new
-                    {
-                        PlaceId = c.String(nullable: false, maxLength: 128),
-                        WoeId = c.String(),
-                        Latitude = c.String(),
-                        Longitude = c.String(),
-                        Value = c.String(),
-                    })
-                .PrimaryKey(t => t.PlaceId);
-            
-            CreateTable(
                 "dbo.AspNetUserRoles",
                 c => new
                     {
@@ -117,17 +118,17 @@ namespace Immedia.Picture.Api.Entities.Migrations
                 .Index(t => t.Photo_Id);
             
             CreateTable(
-                "dbo.PlaceApplicationUsers",
+                "dbo.ApplicationUserPlaces",
                 c => new
                     {
-                        Place_PlaceId = c.String(nullable: false, maxLength: 128),
                         ApplicationUser_Id = c.String(nullable: false, maxLength: 128),
+                        Place_PlaceId = c.String(nullable: false, maxLength: 128),
                     })
-                .PrimaryKey(t => new { t.Place_PlaceId, t.ApplicationUser_Id })
-                .ForeignKey("dbo.Places", t => t.Place_PlaceId, cascadeDelete: true)
+                .PrimaryKey(t => new { t.ApplicationUser_Id, t.Place_PlaceId })
                 .ForeignKey("dbo.AspNetUsers", t => t.ApplicationUser_Id, cascadeDelete: true)
-                .Index(t => t.Place_PlaceId)
-                .Index(t => t.ApplicationUser_Id);
+                .ForeignKey("dbo.Places", t => t.Place_PlaceId, cascadeDelete: true)
+                .Index(t => t.ApplicationUser_Id)
+                .Index(t => t.Place_PlaceId);
             
         }
         
@@ -135,15 +136,15 @@ namespace Immedia.Picture.Api.Entities.Migrations
         {
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
             DropForeignKey("dbo.AspNetUserRoles", "UserId", "dbo.AspNetUsers");
-            DropForeignKey("dbo.PlaceApplicationUsers", "ApplicationUser_Id", "dbo.AspNetUsers");
-            DropForeignKey("dbo.PlaceApplicationUsers", "Place_PlaceId", "dbo.Places");
-            DropForeignKey("dbo.Photos", "Place_PlaceId", "dbo.Places");
+            DropForeignKey("dbo.ApplicationUserPlaces", "Place_PlaceId", "dbo.Places");
+            DropForeignKey("dbo.ApplicationUserPlaces", "ApplicationUser_Id", "dbo.AspNetUsers");
             DropForeignKey("dbo.ApplicationUserPhotoes", "Photo_Id", "dbo.Photos");
             DropForeignKey("dbo.ApplicationUserPhotoes", "ApplicationUser_Id", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
-            DropIndex("dbo.PlaceApplicationUsers", new[] { "ApplicationUser_Id" });
-            DropIndex("dbo.PlaceApplicationUsers", new[] { "Place_PlaceId" });
+            DropForeignKey("dbo.Photos", "place_PlaceId", "dbo.Places");
+            DropIndex("dbo.ApplicationUserPlaces", new[] { "Place_PlaceId" });
+            DropIndex("dbo.ApplicationUserPlaces", new[] { "ApplicationUser_Id" });
             DropIndex("dbo.ApplicationUserPhotoes", new[] { "Photo_Id" });
             DropIndex("dbo.ApplicationUserPhotoes", new[] { "ApplicationUser_Id" });
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
@@ -152,15 +153,15 @@ namespace Immedia.Picture.Api.Entities.Migrations
             DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
             DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
             DropIndex("dbo.AspNetUsers", "UserNameIndex");
-            DropIndex("dbo.Photos", new[] { "Place_PlaceId" });
-            DropTable("dbo.PlaceApplicationUsers");
+            DropIndex("dbo.Photos", new[] { "place_PlaceId" });
+            DropTable("dbo.ApplicationUserPlaces");
             DropTable("dbo.ApplicationUserPhotoes");
             DropTable("dbo.AspNetRoles");
             DropTable("dbo.AspNetUserRoles");
-            DropTable("dbo.Places");
             DropTable("dbo.AspNetUserLogins");
             DropTable("dbo.AspNetUserClaims");
             DropTable("dbo.AspNetUsers");
+            DropTable("dbo.Places");
             DropTable("dbo.Photos");
         }
     }

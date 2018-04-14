@@ -28,6 +28,7 @@ namespace Immedia.Picture.Api.Entities
         }
 
         public virtual List<ApplicationUser> User { get; set; }
+        public virtual Place place { get; set; }
     }
 
     public class Result

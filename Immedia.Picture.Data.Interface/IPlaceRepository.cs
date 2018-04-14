@@ -11,5 +11,6 @@ namespace Immedia.Picture.Data.Interface
     public interface IPlaceRepository : IDataRepository<Place>
     {
         void SavePlacePhoto(string placeId, List<Photo> photos);
+        void SaveLocations(List<Place> places);
     }
 }

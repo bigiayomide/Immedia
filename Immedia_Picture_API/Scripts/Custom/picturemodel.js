@@ -2,21 +2,24 @@
     var self = this;
 
     var tokenKey = 'accessToken';
-    var longitude = "";
-    var latitude = "";
 
+    self.getcurrentlocation =function() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition);
+        } else {
+            alert("Geolocation is not supported by this browser.");
+        }
+    }
 
-    $.get("https://api.ipdata.co", function (response) {
-        longitude = response.longitude;
-        latitude = response.latitude;
-    });
-
+    function showPosition(position) {
+        self.latitude(position.coords.latitude);
+        self.longitude(position.coords.longitude);
+    }
 
     self.result = ko.observable();
     self.user = ko.observable();
-
-    self.longitude = ko.observable(longitude);
-    self.latitude = ko.observable(latitude);
+    self.longitude = ko.observable();
+    self.latitude = ko.observable();
 
     self.page = ko.observable();
 
@@ -67,7 +70,8 @@
         }).fail(showError);
     }
 
-    self.getPictures = function (id) {
+    self.getPicturesLonLat = function () {
+
 
         var token = sessionStorage.getItem(tokenKey);
         var headers = {};
@@ -77,13 +81,13 @@
 
         self.result('');
         self.errors.removeAll();
-
-        console.log(self.latitude());
-
+        var getdata = { longitide: "28.1122679", latitude: "-26.270759299999998", page: 1 };
+        console.log(getdata);
+        console.log(self.longitude());
         $.ajax({
             type: 'GET',
-            url: '/api/Picture/GetLocationPictures',
-            data: { locationId: id, page: 1 },
+            url: '/api/Picture/GetLocationByLonLat',
+            data: getdata,
             headers: headers
         }).done(function (data) {
             self.result(data);
@@ -91,9 +95,51 @@
             console.log(self.result());
         }).fail(showError);
     }
+    self.favourite = function(data,event) {
+        var token = sessionStorage.getItem(tokenKey);
+        var headers = {};
+        if (token) {
+            headers.Authorization = 'Bearer ' + token;
+        }
+        console.log(data);
+        $.ajax({
+            type: 'POST',
+            url: '/api/Picture/SavePictureforUser',
+            data: data,
+            headers: headers
+        }).done(function (data) {
+
+        }).fail(showError);
+
+    }
+
+    self.getPictures = function (place) {
+
+        var token = sessionStorage.getItem(tokenKey);
+        var headers = {};
+        if (token) {
+            headers.Authorization = 'Bearer ' + token;
+        }
+   
+        var getdata = { place_id: place.PlaceId, PlaceId: place.PlaceId };
+
+        self.result('');
+        self.errors.removeAll();
+
+        console.log(getdata);
+        $.ajax({
+            type: 'POST',
+            url: '/api/Picture/GetLocationPicturesById',
+            data: place,
+            headers: headers
+        }).done(function (data) {
+            self.result(data);
+        }).fail(showError);
+    }
 
 }
 
-var app = new ViewModel();
-
-ko.applyBindings(app);
+ var app = new ViewModel();
+ app.getcurrentlocation();
+ app.getPicturesLonLat();
+ ko.applyBindings(app);

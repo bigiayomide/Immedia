@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Owin;
 using Owin;
+using Hangfire;
 
 [assembly: OwinStartup(typeof(Immedia.Picture.Api.Startup))]
 
@@ -13,6 +14,11 @@ namespace Immedia.Picture.Api
         public void Configuration(IAppBuilder app)
         {
             ConfigureAuth(app);
+
+            GlobalConfiguration.Configuration.UseSqlServerStorage("DefaultConnection");
+
+            app.UseHangfireDashboard();
+            app.UseHangfireServer();
         }
     }
 }

@@ -232,7 +232,8 @@ a.article, a.article:hover {
     border: 1px solid #dee2e6;
     border-radius: .25rem;
     max-width: 100%;
-    height: auto;
+    height:250px;
+    width:500px
 }
 img {
     vertical-align: middle;
@@ -295,4 +296,22 @@ img {
     -webkit-border-radius: 0px;
     -moz-border-radius: 0px;
     background-image: none;
+}
+.top-bar {
+    position: fixed;
+    left: 277px;
+    right: 2px;
+    top: 0;
+    z-index: 1;
+}
+.body-content{
+    margin-top: 100px;
+}
+.alert-favourite{
+   position: fixed;
+    bottom: 0;
+    right: 0;
+    width: 300px;
+    border: 3px solid  #6d7fcc;
+
 }

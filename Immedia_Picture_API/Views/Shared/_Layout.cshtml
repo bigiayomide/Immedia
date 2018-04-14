@@ -149,7 +149,7 @@
 
         <!-- Page Content Holder -->
         <div id="content" class="">
-            <nav class="navbar navbar-default" style="position:  fixed;left: 277px;right: 2px;top: 0;">
+            <nav class="navbar navbar-default top-bar" style="position:  fixed;left: 277px;right: 2px;top: 0;    z-index: 1;">
                 <div class="container-fluid">
 
                     <div class="navbar-header">
@@ -175,10 +175,19 @@
                     </div>
                 </div>
             </nav>
-            @RenderBody()
+            <div class="body-content">
+                @RenderBody()
+            </div>
         </div>
     </div>
-
+    <div id="success" class="alert-favourite alert alert-success alert-dismissible fade in invisible">
+        <button  class="close" data-dismiss="alert" aria-label="close">&times;</button>
+        <strong>Success!</strong> Added to Favourites
+    </div>
+    <div id="failure" class="alert-favourite alert alert-danger alert-dismissible fade in ">
+        <button  class="close" data-dismiss="alert" aria-label="close">&times;</button>
+        <strong>Failure!</strong> An Error Occured
+    </div>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")

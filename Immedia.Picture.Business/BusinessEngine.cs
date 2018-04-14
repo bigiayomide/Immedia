@@ -9,9 +9,8 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
-using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
+using Hangfire;
 
 namespace Immedia.Picture.Business
 {
@@ -46,14 +45,45 @@ namespace Immedia.Picture.Business
             return point;
         }
 
-        public async Task<Result> GetLocationPictureLatLonAsync(string locationId, int? page,string userId)
+        public async Task<Result> GetLocationPicturesByIdAsync(Place place, int? page,string userId)
+        {
+            //try
+            //{
+                SaveUserLocation(place,  userId);
+                Result result = await _searchRequest.GetPhotosforLocationAsync(place.Latitude, place.Longitude, page.Value);
+
+            BackgroundJob.Enqueue(() =>  SavePictures(result, place));
+
+            if (result != null)
+                {
+                    return result;
+                }
+
+                return null;
+            //}
+            //catch (Exception ex)
+            //{
+            //    return null;
+
+            //}
+        }
+        public async Task SavePictures(Result result,Place place)
+        {
+            while (result.Pages != result.Page)
+            {
+                _PlaceRepository.SavePlacePhoto(place.PlaceId, result.Photos);
+                result.Page++;
+                result = await _searchRequest.GetPhotosforLocationAsync(place.Latitude, place.Longitude, result.Page);
+            }
+            int i = 0;
+        }
+        public async Task<Result> GetLocationByLonLat(string longitude, string latitude, int? page)
         {
             try
             {
-                Place place=SaveUserLocation( locationId,  userId);
-                Result result = await _searchRequest.GetPhotosforLocationAsync(place.Latitude, place.Longitude, page.Value);
-
-                _PlaceRepository.SavePlacePhoto(place.PlaceId, result.Photos);
+                Result result = await _searchRequest.GetPhotosforLocationAsync(latitude,longitude,page.Value);
+                Place place = await _searchRequest.GetLocationByLonLat(latitude, longitude);
+                BackgroundJob.Enqueue(() => SavePictures(result, place));
                 if (result != null)
                 {
                     return result;
@@ -67,19 +97,18 @@ namespace Immedia.Picture.Business
 
             }
         }
-
-        public void SavePictureforUser(string userid, Photo photo)
+        public void SavePictureforUser(Photo photo,string userId)
         {
             try
             {
-                if (!string.IsNullOrEmpty(userid) && photo != null)
+                if (!string.IsNullOrEmpty(userId) && photo != null)
                 {
                     _UserRepository = _DataRepositoryFactory.GetDataRepository<IUserRepository>();
-                    ApplicationUser User= _UserRepository.Get(userid);
+                    ApplicationUser User= _UserRepository.Get(userId);
                     if(User!=null)
                     {
                         if (User.Photos.Where(x=>x.Id==photo.Id)==null)
-                            _UserRepository.SavePictureForUser(photo, userid);
+                            _UserRepository.SavePictureForUser(photo, userId);
                     }
                 }
             }
@@ -102,24 +131,19 @@ namespace Immedia.Picture.Business
         public async  Task<List<Place>> Getlocations(string query)
         {
             List<Place> places= await _searchRequest.GetLocationquery(query);
-
-            await Task.Factory.StartNew(() => {
-                foreach (var item in places)
-                {
-                    Place place = _PlaceRepository.Get(item.PlaceId);
-                    if (place == null)
-                        _PlaceRepository.Add(item);
-                }
-            }, TaskCreationOptions.LongRunning);
+            BackgroundJob.Enqueue(() => _PlaceRepository.SaveLocations(places) );
             return places;
         }
-        public Place SaveUserLocation(string locationId, string userId)
+        public Place SaveUserLocation(Place place, string userId)
         {
-            Place place = _PlaceRepository.Get(locationId);
-           
+            
+            if(_PlaceRepository.Get(place.PlaceId)==null)
+            {
+                _PlaceRepository.Add(place);
+            }
             if (!String.IsNullOrEmpty(userId))
             {
-                _UserRepository.SaveUserLocation(locationId, place);
+                _UserRepository.SaveUserLocation(place.PlaceId, place);
             }
             return place;
         }

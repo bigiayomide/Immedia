@@ -1,13 +1,8 @@
 ﻿using Immedia.Picture.Api.Core.Common.Core;
 using Immedia.Picture.Api.Core.Contracts;
 using Immedia.Picture.Api.Entities;
-using Immedia.Picture.Api.Request;
-using Immedia.Picture.Api.Request.Requests;
 using Immedia.Picture.Business;
 using Immedia.Picture.Business.Interface;
-using Immedia.Picture.Data;
-using Immedia.Picture.Data.Interface;
-using Immedia.Picture.Data.Repository;
 using Microsoft.AspNet.Identity;
 using System;
 using System.ComponentModel.Composition;
@@ -23,9 +18,10 @@ namespace Immedia_Picture_API.Controllers
     {
         [Import]
         IBusinessEngineFactory _BusinessRepositoryFactory;
+        IBusinessEngine business;
         public PictureController()
         {
-
+            business=ObjectBase.Container.GetExportedValue<IBusinessEngine>();
         }
         [ImportingConstructor]
         public PictureController(IBusinessEngineFactory BusinessRepositoryFactory)
@@ -35,27 +31,39 @@ namespace Immedia_Picture_API.Controllers
 
 
 
-        [Route("GetLocationPictures")]
-        public async  Task<IHttpActionResult> GetLonLatPictures(string locationId,int? page)
+        [Route("GetLocationPicturesById")]
+        [HttpPost]
+        public async   Task<IHttpActionResult> PostLocationPicturesById(Place place)
+        {
+            int? page = 1;
+            try
+            {
+                return Content(HttpStatusCode.OK, await business.GetLocationPicturesByIdAsync(place, page.Value, User.Identity.GetUserId()));
+            }
+            catch (Exception ex)
+            {
+                return Content(HttpStatusCode.InternalServerError, "");
+            }
+        }
+        [Route("GetLocationByLonLat")]
+        public async Task<IHttpActionResult> GetLocationByLonLat(string longitide,string latitude,int? page)
         {
             try
             {
-                IBusinessEngine business= ObjectBase.Container.GetExportedValue<IBusinessEngine>();
-                //IBusinessEngine business = _BusinessRepositoryFactory.GetBusinessEngine<IBusinessEngine>();
-                return Content(HttpStatusCode.OK, await business.GetLocationPictureLatLonAsync(locationId, page.Value, User.Identity.GetUserId()));
+                return Content(HttpStatusCode.OK, await business.GetLocationByLonLat(longitide,latitude,page));
             }
             catch (Exception ex)
             {
                 return Content(HttpStatusCode.InternalServerError, ex.Message);
             }
         }
-
-        public IHttpActionResult SavePictureforUser(string userid, Photo photo)
+        [Route("SavePictureforUser")]
+        public IHttpActionResult SavePictureforUser(Photo photo)
         {
             try
             {
-                IBusinessEngine business = ObjectBase.Container.GetExportedValue<IBusinessEngine>();
-                business.SavePictureforUser(userid, photo);
+
+                business.SavePictureforUser(photo,User.Identity.GetUserId());
                 return Ok();
             }
             catch(Exception ex)
@@ -68,7 +76,6 @@ namespace Immedia_Picture_API.Controllers
         {
             try
             {
-                IBusinessEngine business = ObjectBase.Container.GetExportedValue<IBusinessEngine>();
                 return Content(HttpStatusCode.OK, await business.Getlocations(query));
             }
             catch (Exception ex)
@@ -80,8 +87,7 @@ namespace Immedia_Picture_API.Controllers
         {
             try
             {
-                IBusinessEngine business = ObjectBase.Container.GetExportedValue<IBusinessEngine>();
-                return Content(HttpStatusCode.InternalServerError, business.GetPictureDetails(Id));
+                return Content(HttpStatusCode.OK, business.GetPictureDetails(Id));
             }
             catch (Exception ex)
             {

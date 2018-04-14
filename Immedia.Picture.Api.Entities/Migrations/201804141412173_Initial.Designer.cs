@@ -13,7 +13,7 @@ namespace Immedia.Picture.Api.Entities.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201804140351508_Initial"; }
+            get { return "201804141412173_Initial"; }
         }
         
         string IMigrationMetadata.Source

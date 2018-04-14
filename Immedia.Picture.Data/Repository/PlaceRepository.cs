@@ -57,5 +57,17 @@ namespace Immedia.Picture.Data.Repository
                 entityContext.SaveChanges();
             }
         }
+        public void SaveLocations(List<Place> places)
+        {
+            using (ApplicationDbContext entityContext = new ApplicationDbContext())
+            {
+                foreach (var item in places)
+                {
+                    Place place = GetEntity(entityContext,item.PlaceId);
+                    if (place == null)
+                        entityContext.SaveChanges();
+                }
+            }
+        }
     }
 }

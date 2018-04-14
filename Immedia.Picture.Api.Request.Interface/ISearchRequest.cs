@@ -24,5 +24,9 @@ namespace Immedia.Picture.Data
 
 
         Task<List<Place>> GetLocationquery(string query);
+
+        Task<Place> GetLocationByLonLat(string lat, string lon);
+
+
     }
 }

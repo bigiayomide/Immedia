@@ -9,17 +9,15 @@
 
             }).done(function (data) {
                 response($.map(data, function (item) {
-                    console.log(item.PlaceId);
-                    return { label: item.Value, value: item.Value, id: item.PlaceId };
+                    return { label: item.Value, value: item.Value, place: item };
                 }));
             });
 
         },
         select: function (event, ui) {
             var value = ui.item.value;
-            var id = ui.item.id;
-            app.getPictures(id);
-            alert(value + " " + id)
+            var place = ui.item.place;
+            app.getPictures(place);
             return false;
         },
         messages: {
