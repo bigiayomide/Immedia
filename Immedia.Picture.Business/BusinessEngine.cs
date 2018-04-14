@@ -46,13 +46,13 @@ namespace Immedia.Picture.Business
             return point;
         }
 
-        public async Task<Result> GetLocationPictureLatLonAsync(Place place,int? page,string userId)
+        public async Task<Result> GetLocationPictureLatLonAsync(string locationId, int? page,string userId)
         {
             try
             {
+                Place place=SaveUserLocation( locationId,  userId);
                 Result result = await _searchRequest.GetPhotosforLocationAsync(place.Latitude, place.Longitude, page.Value);
 
-                _UserRepository.SaveUserLocation(userId, place);
                 _PlaceRepository.SavePlacePhoto(place.PlaceId, result.Photos);
                 if (result != null)
                 {
@@ -102,6 +102,7 @@ namespace Immedia.Picture.Business
         public async  Task<List<Place>> Getlocations(string query)
         {
             List<Place> places= await _searchRequest.GetLocationquery(query);
+
             await Task.Factory.StartNew(() => {
                 foreach (var item in places)
                 {
@@ -112,9 +113,15 @@ namespace Immedia.Picture.Business
             }, TaskCreationOptions.LongRunning);
             return places;
         }
-        public void SaveUserLocation(string locationId, Place place)
+        public Place SaveUserLocation(string locationId, string userId)
         {
-            _UserRepository.SaveUserLocation(locationId, place);
+            Place place = _PlaceRepository.Get(locationId);
+           
+            if (!String.IsNullOrEmpty(userId))
+            {
+                _UserRepository.SaveUserLocation(locationId, place);
+            }
+            return place;
         }
             
         public ApiRequest Api;

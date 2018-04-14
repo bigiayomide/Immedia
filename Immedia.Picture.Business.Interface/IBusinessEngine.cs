@@ -7,7 +7,7 @@ namespace Immedia.Picture.Business.Interface
 {
     public interface IBusinessEngine
     {
-        Task<Result> GetLocationPictureLatLonAsync(Place place, int? page,string userId);
+        Task<Result> GetLocationPictureLatLonAsync(string locationId, int? page, string userId);
         void SavePictureforUser(string Userid, Photo photo);
         MapPoint GetLocationLonLat(string address);
         Photo GetPictureDetails(int id);

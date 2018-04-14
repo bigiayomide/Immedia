@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace Immedia.Picture.Api.Entities
 {
@@ -19,8 +20,8 @@ namespace Immedia.Picture.Api.Entities
         public string Latitude { get; set; }
         [DataMember(Name = "longitude")]
         public string Longitude { get; set; }
-        [DataMember(Name = "name")]
-        public string Name { get; set; }
+        [DataMember(Name = "Value")]
+        public string Value { get; set; }
 
         [DataMember(Name= "photos")]
         public virtual List<Photo> Photos { get; set; }

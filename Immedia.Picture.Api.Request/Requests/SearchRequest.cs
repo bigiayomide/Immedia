@@ -34,9 +34,10 @@ namespace Immedia.Picture.Api.Request.Requests
 
         public async Task<List<Place>> GetLocationquery(string query)
         {
-            return await Task.Factory.StartNew(() =>
+            return await Task.Run(() =>
             {
-                IRestResponse<List<Place>> response = _client.Execute<List<Place>>(new RestRequest(string.Format("?method=flickr.places.find&format=rest&api_key={0}&query={1}", _apiKey, query), Method.GET));
+                RestRequest request = new RestRequest(string.Format("?method=flickr.places.find&format=rest&api_key={0}&query={1}", _apiKey, query), Method.GET);
+                IRestResponse<List<Place>> response = _client.Execute<List<Place>>(request);
                 return response.Data;
             });
         }

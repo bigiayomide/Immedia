@@ -67,7 +67,7 @@
         }).fail(showError);
     }
 
-    self.getPictures = function () {
+    self.getPictures = function (id) {
 
         var token = sessionStorage.getItem(tokenKey);
         var headers = {};
@@ -79,16 +79,11 @@
         self.errors.removeAll();
 
         console.log(self.latitude());
-        var Page = { Name: "Ayomide" };
-        var getdata = {
-            place: Page,
-            page: 1
-        };
 
         $.ajax({
             type: 'GET',
             url: '/api/Picture/GetLocationPictures',
-            data: getdata,
+            data: { locationId: id, page: 1 },
             headers: headers
         }).done(function (data) {
             self.result(data);
@@ -100,5 +95,5 @@
 }
 
 var app = new ViewModel();
-app.getPictures();
+
 ko.applyBindings(app);

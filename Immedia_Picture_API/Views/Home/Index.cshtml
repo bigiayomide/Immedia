@@ -4,7 +4,7 @@
 <div data-bind="foreach: result">
     <div data-bind="foreach:Photos" class="row text-center text-lg-left">
         <div class="col-lg-3 col-md-4 col-xs-6 image-div">
-            <img data-bind="attr:{src: ImgUrl}" class="img-fluid img-thumbnail" style="height:250px;width:300px" alt="">
+            <img data-bind="attr:{src: ImgUrl}" class="img-fluid img-thumbnail" @*style="height:250px;width:300px"*@ alt="">
             <div class="middle">
                 <a href="#" class="btn btn-success btn-sm btn-inline">
                     <span class="glyphicon glyphicon-save"></span> Save

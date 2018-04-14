@@ -58,10 +58,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BusinessEngine.cs" />
-    <Compile Include="IBusinessEngineFactory.cs" />
+    <Compile Include="BusinessEngineFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Immedia.Picture.Api.Core.Common\Immedia.Picture.Api.Core.Common.csproj">
+      <Project>{77B2A10A-9776-4B4A-B197-363933B65504}</Project>
+      <Name>Immedia.Picture.Api.Core.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Immedia.Picture.Api.Core.Contracts\Immedia.Picture.Api.Core.Contracts.csproj">
       <Project>{2C33DCA7-62EF-457B-A6D9-7ABA0F1BB56F}</Project>
       <Name>Immedia.Picture.Api.Core.Contracts</Name>

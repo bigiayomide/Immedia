@@ -58,9 +58,9 @@
     <Compile Include="AccountViewModels.cs" />
     <Compile Include="Class1.cs" />
     <Compile Include="IdentityModels.cs" />
-    <Compile Include="Migrations\201804121204598_initial.cs" />
-    <Compile Include="Migrations\201804121204598_initial.Designer.cs">
-      <DependentUpon>201804121204598_initial.cs</DependentUpon>
+    <Compile Include="Migrations\201804140351508_Initial.cs" />
+    <Compile Include="Migrations\201804140351508_Initial.Designer.cs">
+      <DependentUpon>201804140351508_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Photo.cs" />
@@ -72,8 +72,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201804121204598_initial.resx">
-      <DependentUpon>201804121204598_initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201804140351508_Initial.resx">
+      <DependentUpon>201804140351508_Initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

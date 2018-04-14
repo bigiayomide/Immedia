@@ -1,5 +1,6 @@
 ﻿using Immedia.Picture.Api.Bootstraper;
 using Immedia.Picture.Api.Core.Common.Core;
+using Immedia_Picture_API.Providers;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition.Hosting;
@@ -28,6 +29,9 @@ namespace Immedia.Picture.Api
             catalog.Catalogs.Add(new AssemblyCatalog(Assembly.GetExecutingAssembly()));
             CompositionContainer container = MefLoader.Init(catalog.Catalogs);
             ObjectBase.Container = container;
+
+            DependencyResolver.SetResolver(new MefDependencyResolver(container)); // view controllers
+            GlobalConfiguration.Configuration.DependencyResolver = new MefAPIDependencyResolver(container);
         }
     }
 }
