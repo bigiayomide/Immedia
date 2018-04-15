@@ -11,6 +11,11 @@ namespace Immedia.Picture.Api.Entities
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit https://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
     public class ApplicationUser : IdentityUser
     {
+        public ApplicationUser()
+        {
+            Places = new List<Place>();
+            Photos = new List<Photo>();
+        }
         public virtual List<Photo> Photos { get; set; }
         public virtual List<Place> Places { get; set; }
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager, string authenticationType)
@@ -33,6 +38,12 @@ namespace Immedia.Picture.Api.Entities
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();
+        }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            this.Configuration.LazyLoadingEnabled = false;
         }
     }
 }

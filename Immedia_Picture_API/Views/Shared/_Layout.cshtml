@@ -14,137 +14,82 @@
     <div class="user-modal">
         <div class="user-modal-container">
             <ul class="switcher">
-                <li><a href="#0">Sign in</a></li>
-                <li><a href="#0">New account</a></li>
+                <li><a>Sign in</a></li>
+                <li><a>New account</a></li>
             </ul>
 
             <div id="login">
-                <form class="form">
+                <form data-bind="submit: login" class="form">
                     <p class="fieldset">
                         <label class="image-replace email" for="signin-email">E-mail</label>
-                        <input class="full-width has-padding has-border" id="signin-email" type="email" placeholder="E-mail">
-                        <span class="error-message">An account with this email address does not exist!</span>
+                        <input data-bind="value: loginEmail"  class="full-width has-padding has-border" id="signin-email" type="email" placeholder="E-mail">
                     </p>
 
                     <p class="fieldset">
                         <label class="image-replace password" for="signin-password">Password</label>
-                        <input class="full-width has-padding has-border" id="signin-password" type="password" placeholder="Password">
-                        <a href="#0" class="hide-password">Show</a>
-                        <span class="error-message">Wrong password! Try again.</span>
+                        <input data-bind="value: loginPassword" class="full-width has-padding has-border" id="signin-password" type="password" placeholder="Password">
+                        <a class="hide-password">Show</a>
                     </p>
-
-                    <p class="fieldset">
-                        <input type="checkbox" id="remember-me" checked>
-                        <label for="remember-me">Remember me</label>
-                    </p>
-
                     <p class="fieldset">
                         <input class="full-width" type="submit" value="Login">
                     </p>
+                    <div class="form-group error-messages" data-bind="foreach: errors">
+                        <p data-bind="text: $data" />
+                    </div>
                 </form>
-
-                <p class="form-bottom-message"><a href="#0">Forgot your password?</a></p>
-                <!-- <a href="#0" class="close-form">Close</a> -->
             </div>
 
             <div id="signup">
-                <form class="form">
-                    <p class="fieldset">
-                        <label class="image-replace username" for="signup-username">Username</label>
-                        <input class="full-width has-padding has-border" id="signup-username" type="text" placeholder="Username">
-                        <span class="error-message">Your username can only contain numeric and alphabetic symbols!</span>
-                    </p>
-
+                <form data-bind="submit: register" class="form">
                     <p class="fieldset">
                         <label class="image-replace email" for="signup-email">E-mail</label>
-                        <input class="full-width has-padding has-border" id="signup-email" type="email" placeholder="E-mail">
-                        <span class="error-message">Enter a valid email address!</span>
+                        <input data-bind="value: registerEmail" class="full-width has-padding has-border" id="signup-email" type="email" placeholder="E-mail">
                     </p>
 
                     <p class="fieldset">
                         <label class="image-replace password" for="signup-password">Password</label>
-                        <input class="full-width has-padding has-border" id="signup-password" type="password" placeholder="Password">
-                        <a href="#0" class="hide-password">Show</a>
-                        <span class="error-message">Your password has to be at least 6 characters long!</span>
+                        <input data-bind="value: registerPassword" class="full-width has-padding has-border" id="signup-password" type="password" placeholder="Password">
+                        <a  class="hide-password">Show</a>
                     </p>
-
                     <p class="fieldset">
-                        <input type="checkbox" id="accept-terms">
-                        <label for="accept-terms">I agree to the <a class="accept-terms" href="#0">Terms</a></label>
+                        <label class="image-replace password" for="confirm-password">Confirm Password</label>
+                        <input data-bind="value: registerPassword2" class="full-width has-padding has-border" id="confirm-password" type="password" placeholder="Password">
+                        <a class="hide-password">Show</a>
                     </p>
-
                     <p class="fieldset">
                         <input class="full-width has-padding" type="submit" value="Create account">
                     </p>
+                    <div class="form-group error-messages" data-bind="foreach: errors">
+                        <p data-bind="text: $data" />
+                    </div>
                 </form>
-
-                <!-- <a href="#0" class="cd-close-form">Close</a> -->
             </div>
 
-            <div id="reset-password">
-                <p class="form-message">Lost your password? Please enter your email address.</br> You will receive a link to create a new password.</p>
-
-                <form class="form">
-                    <p class="fieldset">
-                        <label class="image-replace email" for="reset-email">E-mail</label>
-                        <input class="full-width has-padding has-border" id="reset-email" type="email" placeholder="E-mail">
-                        <span class="error-message">An account with this email does not exist!</span>
-                    </p>
-
-                    <p class="fieldset">
-                        <input class="full-width has-padding" type="submit" value="Reset password">
-                    </p>
-                </form>
-
-                <p class="form-bottom-message"><a href="#0">Back to log-in</a></p>
-            </div>
-            <a href="#0" class="close-form">Close</a>
         </div>
     </div>
-
     <div class="wrapper">
         <!-- Sidebar Holder -->
-        <nav id="sidebar" class="mCustomScrollbar _mCS_1 mCS-autoHide mCS_no_scrollbar" style="overflow: visible;">
+        <nav id="sidebar" class="mCustomScrollbar _mCS_1 mCS-autoHide mCS_no_scrollbar" style="overflow: visible;z-index: 1;">
             <div id="mCSB_1" class="mCustomScrollBox mCS-minimal mCSB_vertical mCSB_outside" style="max-height: none;" tabindex="0">
                 <div id="mCSB_1_container" class="mCSB_container mCS_y_hidden mCS_no_scrollbar_y" style="position:relative; top:0; left:0;" dir="ltr">
                     <div class="sidebar-header">
-                        <h3>Bootstrap Sidebar</h3>
+                        <h3>Immedia</h3>
                     </div>
 
                     <ul class="list-unstyled components">
                         <p>Dummy Heading</p>
-                        <li class="active">
-                            <a href="https://bootstrapious.com/tutorial/sidebar/index2.html#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="collapsed">Home</a>
-                            <ul class="list-unstyled collapse" id="homeSubmenu" aria-expanded="false" style="height: 0px;">
-                                <li><a href="https://bootstrapious.com/tutorial/sidebar/index2.html#">Home 1</a></li>
-                                <li><a href="https://bootstrapious.com/tutorial/sidebar/index2.html#">Home 2</a></li>
-                                <li><a href="https://bootstrapious.com/tutorial/sidebar/index2.html#">Home 3</a></li>
-                            </ul>
-                        </li>
                         <li>
-                            <a href="https://bootstrapious.com/tutorial/sidebar/index2.html#">About</a>
-                            <a href="https://bootstrapious.com/tutorial/sidebar/index2.html#pageSubmenu" data-toggle="collapse" aria-expanded="false">Pages</a>
+                            <a href="https://bootstrapious.com/tutorial/sidebar/index2.html#">Home</a>
+                            <a href="https://bootstrapious.com/tutorial/sidebar/index2.html#">Saved Pictures</a>
+                             <a href="https://bootstrapious.com/tutorial/sidebar/index2.html#pageSubmenu" data-toggle="collapse" aria-expanded="false">My Locations</a>
                             <ul class="collapse list-unstyled" id="pageSubmenu">
                                 <li><a href="https://bootstrapious.com/tutorial/sidebar/index2.html#">Page 1</a></li>
-                                <li><a href="https://bootstrapious.com/tutorial/sidebar/index2.html#">Page 2</a></li>
-                                <li><a href="https://bootstrapious.com/tutorial/sidebar/index2.html#">Page 3</a></li>
                             </ul>
-                        </li>
-                        <li>
-                            <a href="https://bootstrapious.com/tutorial/sidebar/index2.html#">Portfolio</a>
-                        </li>
-                        <li>
-                            <a href="https://bootstrapious.com/tutorial/sidebar/index2.html#">Contact</a>
                         </li>
                     </ul>
 
-                    <ul class="list-unstyled CTAs">
-                        <li><a href="https://bootstrapious.com/tutorial/files/sidebar.zip" class="download">Download source</a></li>
-                        <li><a href="https://bootstrapious.com/p/bootstrap-sidebar" class="article">Back to article</a></li>
-                    </ul>
                 </div>
             </div>
-            <div id="mCSB_1_scrollbar_vertical" class="mCSB_scrollTools mCSB_1_scrollbar mCS-minimal mCSB_scrollTools_vertical" style="display: none;"><div class="mCSB_draggerContainer"><div id="mCSB_1_dragger_vertical" class="mCSB_dragger" style="position: absolute; min-height: 50px; height: 0px; top: 0px; display: block; max-height: 641px;"><div class="mCSB_dragger_bar" style="line-height: 50px;"></div></div><div class="mCSB_draggerRail"></div></div></div>
         </nav>
 
         <!-- Page Content Holder -->
@@ -159,13 +104,12 @@
                         </button>
                     </div>
                 
-                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                        <ul class="nav navbar-nav navbar-right">
-                            <li><a href="https://bootstrapious.com/tutorial/sidebar/index2.html#">Page</a></li>
-                            <li><a href="https://bootstrapious.com/tutorial/sidebar/index2.html#">Page</a></li>
-                            <li><a href="https://bootstrapious.com/tutorial/sidebar/index2.html#">Page</a></li>
-                            <li><a href="https://bootstrapious.com/tutorial/sidebar/index2.html#">Page</a></li>
+                    <div class="collapse navbar-collapse main-nav" id="bs-example-navbar-collapse-1">
+                        <ul class="nav signup-nav navbar-nav navbar-right">
+                            <li><a class="signin">Sign in</a></li>
+                            <li><a class="signup">Sign up</a></li>
                         </ul>
+
                         <form class="navbar-form" id="search" role="search">
                             <div class="form-group">
                                 <input type="text" id="searchbox" class="ui-widget form-control" placeholder="Search">
@@ -180,13 +124,13 @@
             </div>
         </div>
     </div>
-    <div id="success" class="alert-favourite alert alert-success alert-dismissible fade in invisible">
+    <div id="success" style="display:none" class="alert-favourite alert alert-success alert-dismissible fade in ">
         <button  class="close" data-dismiss="alert" aria-label="close">&times;</button>
-        <strong>Success!</strong> Added to Favourites
+        <strong id="success_message">Success!</strong> <label id="success_message"></label>
     </div>
-    <div id="failure" class="alert-favourite alert alert-danger alert-dismissible fade in ">
+    <div id="failure"  style="display:none" class="alert-favourite alert alert-danger alert-dismissible fade in ">
         <button  class="close" data-dismiss="alert" aria-label="close">&times;</button>
-        <strong>Failure!</strong> An Error Occured
+        <strong id="failure_message">Failure!</strong> <label id="failure_message"></label>
     </div>
 
     @Scripts.Render("~/bundles/jquery")

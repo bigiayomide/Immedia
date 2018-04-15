@@ -57,9 +57,23 @@ namespace Immedia.Picture.Data.Repository
         {
             using (ApplicationDbContext entityContext = new ApplicationDbContext())
             {
-                ApplicationUser user = GetEntity(entityContext, id);
-                user.Photos.Add(photo);
-                entityContext.SaveChanges();
+                try
+                {
+                    ApplicationUser user = GetEntity(entityContext, id);
+                    if (user != null)
+                    {
+                        if (user.Photos.Where(x => x.Id == photo.Id).Count() == 0)
+                        {
+                            user.Photos.Add(photo);
+                            UpdateEntity(entityContext, user);
+                        }
+                    }
+                }
+                catch(Exception ex)
+                {
+
+                }
+          
             }
         }
         public void RemovePictureForUser(Photo photo, string id)

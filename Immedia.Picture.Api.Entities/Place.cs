@@ -11,6 +11,11 @@ namespace Immedia.Picture.Api.Entities
 {
     public class Place
     {
+        public Place()
+        {
+            Photos = new List<Photo>();
+            Users = new List<ApplicationUser>();
+        }
         [Key]
         [DataMember(Name = "place_id")]
         public string PlaceId { get; set; }
@@ -29,15 +34,5 @@ namespace Immedia.Picture.Api.Entities
         public virtual List<Photo> Photos { get; set; }
 
         public virtual List<ApplicationUser> Users { get; set; }
-    }
-
-    public class PlaceEntity
-    {
-        public string PlaceId { get; set; }
-        public string WoeId { get; set; }
-        public string Latitude { get; set; }
-        public string Longitude { get; set; }
-        public string Name { get; set; }
-        public string Value { get; set; }
     }
 }

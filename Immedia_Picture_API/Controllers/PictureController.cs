@@ -58,6 +58,7 @@ namespace Immedia_Picture_API.Controllers
             }
         }
         [Route("SavePictureforUser")]
+        [Authorize]
         public IHttpActionResult SavePictureforUser(Photo photo)
         {
             try

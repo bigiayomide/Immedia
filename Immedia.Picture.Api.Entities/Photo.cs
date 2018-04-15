@@ -7,6 +7,10 @@ namespace Immedia.Picture.Api.Entities
 {
     public class Photo
     {
+        public Photo()
+        {
+            User = new List<ApplicationUser>();
+        }
         [DataMember(Name = "id")]
         public string Id { get; set; }
         [DataMember(Name = "title")]

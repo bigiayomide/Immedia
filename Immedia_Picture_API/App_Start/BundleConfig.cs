@@ -30,6 +30,7 @@ namespace Immedia.Picture.Api
 
             bundles.Add(new ScriptBundle("~/bundles/app").Include(
                       "~/Scripts/knockout-{version}.js",
+                      "~/Scripts/knockstrap.js",
                       "~/Scripts/Custom/searchautocomplete.js"));
 
             // Set EnableOptimizations to false for debugging. For more information,

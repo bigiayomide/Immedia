@@ -18,7 +18,7 @@ namespace Immedia.Picture.Api.Request.Requests
             IRestResponse<Result> response;
             return await Task.Factory.StartNew(() =>
             {
-                response = _client.Execute<Result>(new RestRequest(string.Format("?method=flickr.photos.search&format=rest&accuracy=11&api_key={0}&lat={1}&lon={2}&page={3}", _apiKey, lat, lon, page), Method.GET));
+                response = _client.Execute<Result>(new RestRequest(string.Format("?method=flickr.photos.search&format=rest&accuracy=11&api_key={0}&lat={1}&lon={2}&page={3}&per_page=30", _apiKey, lat, lon, page), Method.GET));
                 
                 return response.Data;
             });
@@ -46,7 +46,7 @@ namespace Immedia.Picture.Api.Request.Requests
         {
             return await Task.Run(() =>
             {
-                RestRequest request = new RestRequest(string.Format("?method=flickr.places.findByLatLon&format=rest&api_key={0}&lat={1}&lon={2}&accuracy=11", _apiKey, lat,lon), Method.GET);
+                RestRequest request = new RestRequest(string.Format("?method=flickr.places.findByLatLon&format=rest&api_key={0}&lat={1}&lon={2}&accuracy=11&per_page=30", _apiKey, lat,lon  ), Method.GET);
                 IRestResponse <Place> response = _client.Execute<Place>(request);
                 response.Data.Value=response.Data.Name;
                 return response.Data;

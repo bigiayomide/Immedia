@@ -75,7 +75,6 @@ namespace Immedia.Picture.Business
                 result.Page++;
                 result = await _searchRequest.GetPhotosforLocationAsync(place.Latitude, place.Longitude, result.Page);
             }
-            int i = 0;
         }
         public async Task<Result> GetLocationByLonLat(string longitude, string latitude, int? page)
         {
@@ -104,17 +103,13 @@ namespace Immedia.Picture.Business
                 if (!string.IsNullOrEmpty(userId) && photo != null)
                 {
                     _UserRepository = _DataRepositoryFactory.GetDataRepository<IUserRepository>();
-                    ApplicationUser User= _UserRepository.Get(userId);
-                    if(User!=null)
-                    {
-                        if (User.Photos.Where(x=>x.Id==photo.Id)==null)
-                            _UserRepository.SavePictureForUser(photo, userId);
-                    }
+                    _UserRepository.SavePictureForUser(photo, userId);
                 }
+
             }
             catch (Exception ex)
             {
-                
+
             }
         }
 
