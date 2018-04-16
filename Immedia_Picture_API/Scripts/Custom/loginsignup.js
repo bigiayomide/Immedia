@@ -9,7 +9,10 @@
         $forgot_password_link = $form_login.find('.form-bottom-message a'),
         $back_to_login_link = $form_forgot_password.find('.form-bottom-message a'),
         $main_nav = $('.signup-nav');
-
+    function openModal()
+    {
+        $form_modal.addClass('is-visible');
+    }
     //open modal
     $main_nav.on('click', function (event) {
 

@@ -59,12 +59,14 @@ namespace Immedia.Picture.Data.Repository
             {
                 try
                 {
+                    Photo getphoto = entityContext.Photos.Find(photo.Id);
                     ApplicationUser user = GetEntity(entityContext, id);
                     if (user != null)
                     {
-                        if (user.Photos.Where(x => x.Id == photo.Id).Count() == 0)
+                        if (user.Photos.Where(x => x.Id == getphoto.Id).Count() == 0)
                         {
-                            user.Photos.Add(photo);
+                            entityContext.Photos.Attach(getphoto);
+                            user.Photos.Add(getphoto);
                             UpdateEntity(entityContext, user);
                         }
                     }
@@ -86,13 +88,37 @@ namespace Immedia.Picture.Data.Repository
             }
         }
 
-        public void SaveUserLocation(string id, Place place)
+        public void SaveUserLocation(string userId, Place place)
         {
             using (ApplicationDbContext entityContext = new ApplicationDbContext())
             {
+                ApplicationUser user = GetEntity(entityContext, userId);
+                
+                if (user.Places.Where(x => x.PlaceId == place.PlaceId).FirstOrDefault() == null)
+                {
+                    entityContext.Places.Attach(place);
+                    user.Places.Add(place);
+                    entityContext.SaveChanges();
+                }
+            }
+        }
+
+        public List<Place> GetUserLocations(string id)
+        {
+            using (ApplicationDbContext entityContext = new ApplicationDbContext())
+            {
+                Place place = new Place();
                 ApplicationUser user = GetEntity(entityContext, id);
-                user.Places.Add(place);
-                entityContext.SaveChanges();
+                return user.Places;
+            }
+        }
+        public List<Photo> GetUserPhotos(string userId)
+        {
+
+            using (ApplicationDbContext entityContext = new ApplicationDbContext())
+            {
+                ApplicationUser user = GetEntity(entityContext, userId);
+                return user.Photos;
             }
         }
     }

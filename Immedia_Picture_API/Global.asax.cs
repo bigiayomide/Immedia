@@ -1,4 +1,6 @@
-﻿using Immedia.Picture.Api.Bootstraper;
+﻿using Hangfire;
+using HangFire.MEF;
+using Immedia.Picture.Api.Bootstraper;
 using Immedia.Picture.Api.Core.Common.Core;
 using Immedia_Picture_API.Providers;
 using System;
@@ -19,7 +21,7 @@ namespace Immedia.Picture.Api
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
-            GlobalConfiguration.Configure(WebApiConfig.Register);
+            System.Web.Http.GlobalConfiguration.Configure(WebApiConfig.Register);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
@@ -29,9 +31,10 @@ namespace Immedia.Picture.Api
             catalog.Catalogs.Add(new AssemblyCatalog(Assembly.GetExecutingAssembly()));
             CompositionContainer container = MefLoader.Init(catalog.Catalogs);
             ObjectBase.Container = container;
-
+            Hangfire.GlobalConfiguration.Configuration.UseMEFActivator(container);
+            JobActivator.Current = new MEFJobActivator(container);
             DependencyResolver.SetResolver(new MefDependencyResolver(container)); // view controllers
-            GlobalConfiguration.Configuration.DependencyResolver = new MefAPIDependencyResolver(container);
+            System.Web.Http.GlobalConfiguration.Configuration.DependencyResolver = new MefAPIDependencyResolver(container);
         }
     }
 }

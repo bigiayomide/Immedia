@@ -44,6 +44,15 @@ namespace Immedia.Picture.Api.Entities
         {
             base.OnModelCreating(modelBuilder);
             this.Configuration.LazyLoadingEnabled = false;
+
+
+            modelBuilder.Entity<ApplicationUser>()
+              .HasMany(c => c.Places)
+              .WithMany(d => d.Users);
+
+            modelBuilder.Entity<ApplicationUser>()
+             .HasMany(c => c.Photos)
+             .WithMany(d => d.User);
         }
     }
 }

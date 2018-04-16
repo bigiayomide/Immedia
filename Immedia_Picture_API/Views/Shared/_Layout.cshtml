@@ -79,12 +79,12 @@
                     <ul class="list-unstyled components">
                         <p>Dummy Heading</p>
                         <li>
-                            <a href="https://bootstrapious.com/tutorial/sidebar/index2.html#">Home</a>
-                            <a href="https://bootstrapious.com/tutorial/sidebar/index2.html#">Saved Pictures</a>
-                             <a href="https://bootstrapious.com/tutorial/sidebar/index2.html#pageSubmenu" data-toggle="collapse" aria-expanded="false">My Locations</a>
-                            <ul class="collapse list-unstyled" id="pageSubmenu">
-                                <li><a href="https://bootstrapious.com/tutorial/sidebar/index2.html#">Page 1</a></li>
-                            </ul>
+                            <a href="/">Home</a>
+                            <a data-bind="click: UserPictures">Saved Pictures</a>
+                             <a  data-bind="with: UserLocation" data-toggle="collapse" aria-expanded="false">My Locations</a>
+                            @*<ul data-bind="foreach: places" class="collapse list-unstyled" id="pageSubmenu">
+                                <li><a data-bind="attr:{href: PlaceId} text: Value" ></a></li>
+                            </ul>*@
                         </li>
                     </ul>
 

@@ -63,13 +63,27 @@ namespace Immedia_Picture_API.Controllers
         {
             try
             {
-
                 business.SavePictureforUser(photo,User.Identity.GetUserId());
                 return Ok();
             }
             catch(Exception ex)
             {
                 return Content(HttpStatusCode.InternalServerError,ex.Message);
+            }
+        }
+        [Route("GetUserPictures")]
+        [Authorize]
+        public IHttpActionResult GetUserPictures()
+        {
+            try
+            {
+                string userId = User.Identity.GetUserId();
+                business.GetUserPhotos(userId);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return Content(HttpStatusCode.InternalServerError, ex.Message);
             }
         }
         [Route("Getlocations")]
@@ -84,6 +98,7 @@ namespace Immedia_Picture_API.Controllers
                 return Content(HttpStatusCode.InternalServerError, ex.Message);
             }
         }
+        [Route("GetPictureDetails")]
         public IHttpActionResult GetPictureDetails(int Id )
         {
             try
@@ -94,6 +109,20 @@ namespace Immedia_Picture_API.Controllers
             {
                 return Content(HttpStatusCode.InternalServerError, ex.Message);
             }
+        }
+        [Route("GetUserLocations")]
+        public IHttpActionResult GetUserLocations()
+        {
+            try
+            {
+                string UserId = User.Identity.GetUserId();
+                return Content(HttpStatusCode.OK, business.GetUserLocations(UserId));
+            }
+            catch(Exception ex)
+            {
+                return Content(HttpStatusCode.OK, ex.Message);
+            }
+
         }
     }
 }

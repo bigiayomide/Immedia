@@ -13,5 +13,7 @@ namespace Immedia.Picture.Data.Interface
         ApplicationUser GetByLogin(string email);
         void SavePictureForUser(Photo photo, string id);
         void SaveUserLocation(string id, Place place);
+        List<Place> GetUserLocations(string id);
+        List<Photo> GetUserPhotos(string userId);
     }
 }

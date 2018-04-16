@@ -17,6 +17,7 @@
     }
 
     self.result = ko.observable();
+    self.UserLocation = ko.observable();
     self.longitude = ko.observable();
     self.latitude = ko.observable();
     self.user = ko.observable();
@@ -110,28 +111,43 @@
 
     }
 
-    self.getPictures = function (place) {
+    self.getUserLocations = function () {
 
         var token = sessionStorage.getItem(tokenKey);
         var headers = {};
         if (token) {
             headers.Authorization = 'Bearer ' + token;
         }
-   
-        var getdata = { place_id: place.PlaceId, PlaceId: place.PlaceId };
+        $.ajax({
+            type: 'GET',
+            url: '/api/Picture/GetUserLocations',
+            headers: headers
+        }).done(function (data) {
+            self.UserLocation(data);
+            console.log(data);
+        }).fail(showError);
+    }
+
+    self.UserPictures = function () {
+
+        var token = sessionStorage.getItem(tokenKey);
+        var headers = {};
+        if (token) {
+            headers.Authorization = 'Bearer ' + token;
+        }
+
 
         self.result('');
         self.errors.removeAll();
         $.ajax({
-            type: 'POST',
-            url: '/api/Picture/GetLocationPicturesById',
-            data: place,
+            type: 'GET',
+            url: '/api/Picture/GetUserPictures',
             headers: headers
         }).done(function (data) {
+            console.log(data);
             self.result(data);
         }).fail(showError);
     }
-
 
     //Login Signup Function
 
@@ -201,9 +217,32 @@
         }).fail(showError);
     }
 
+    self.getPictures = function (place) {
+
+        var token = sessionStorage.getItem(tokenKey);
+        var headers = {};
+        if (token) {
+            headers.Authorization = 'Bearer ' + token;
+        }
+
+
+        self.result('');
+        self.errors.removeAll();
+
+        $.ajax({
+            type: 'POST',
+            url: '/api/Picture/GetLocationPicturesById',
+            data: place,
+            headers: headers
+        }).done(function (data) {
+            self.result(data);
+        }).fail(showError);
+    }
+
 }
 
  var app = new ViewModel();
  app.getcurrentlocation();
  app.getPicturesLonLat(app.page());
+ app.getUserLocations();
  ko.applyBindings(app);

@@ -46,11 +46,12 @@ namespace Immedia.Picture.Data.Repository
             using (ApplicationDbContext entityContext = new ApplicationDbContext())
             {
                 Place place = GetEntity(entityContext, placeId);
-
                 foreach (var item in photos)
                 {
+
                     if (place.Photos.Where(x => x.Id == item.Id) == null)
                     {
+                        entityContext.Photos.Attach(item);
                         place.Photos.Add(item);
                     }
                 }

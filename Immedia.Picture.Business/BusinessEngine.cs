@@ -52,7 +52,8 @@ namespace Immedia.Picture.Business
                 SaveUserLocation(place,  userId);
                 Result result = await _searchRequest.GetPhotosforLocationAsync(place.Latitude, place.Longitude, page.Value);
 
-            BackgroundJob.Enqueue(() =>  SavePictures(result, place));
+            BackgroundJob.Enqueue(() => SavePictures(result, place));
+            //await SavePictures(result, place);
 
             if (result != null)
                 {
@@ -138,11 +139,19 @@ namespace Immedia.Picture.Business
             }
             if (!String.IsNullOrEmpty(userId))
             {
-                _UserRepository.SaveUserLocation(place.PlaceId, place);
+                _UserRepository.SaveUserLocation(userId, place);
             }
             return place;
         }
             
+        public List<Photo> GetUserPhotos(string userId)
+        {
+            return _UserRepository.GetUserPhotos(userId);
+        }
+        public List<Place> GetUserLocations(string UserId)
+        {
+           return _UserRepository.GetUserLocations(UserId);
+        }
         public ApiRequest Api;
         public string Apikey { get; } = "7e40b74b14e4b62ddd2cadb193d646ed";
         public void Init()

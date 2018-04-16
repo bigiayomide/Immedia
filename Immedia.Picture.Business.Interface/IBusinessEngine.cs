@@ -13,5 +13,7 @@ namespace Immedia.Picture.Business.Interface
         Task<Result> GetLocationByLonLat(string longitude, string latitude, int? page);
         Photo GetPictureDetails(int id);
         Task<List<Place>> Getlocations(string query);
+        List<Place> GetUserLocations(string UserId);
+        List<Photo> GetUserPhotos(string userId);
     }
 }
