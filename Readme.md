@@ -1,3 +1,5 @@
+# Immedia
+
 Installation of this app requires you to do the following.
 
 if you have SQLLOCALDB installed, check the Connectionstring in the webconfig of Immedia.Picture.API and see if it matches your webconfig.
