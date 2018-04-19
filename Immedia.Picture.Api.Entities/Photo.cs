@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using System.Xml.Serialization;
@@ -30,8 +31,11 @@ namespace Immedia.Picture.Api.Entities
                 return string.Format("http://farm{0}.static.flickr.com/{1}/{2}_{3}.jpg", Farm, Server, Id, Secret);
             }
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
         public virtual List<ApplicationUser> User { get; set; }
+        [JsonIgnore]
+        [XmlIgnore]
         public virtual Place place { get; set; }
     }
 

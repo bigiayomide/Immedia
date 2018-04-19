@@ -2,6 +2,7 @@
 using Immedia.Picture.Data.Interface;
 using System;
 using System.Collections.Generic;
+using System.Collections;
 using System.ComponentModel.Composition;
 using System.Linq;
 using System.Text;
@@ -57,25 +58,19 @@ namespace Immedia.Picture.Data.Repository
         {
             using (ApplicationDbContext entityContext = new ApplicationDbContext())
             {
-                try
+
+                Photo getphoto = entityContext.Photos.Where(x => x.Id == photo.Id).First();
+                ApplicationUser user = GetEntity(entityContext, id);
+                if (user != null)
                 {
-                    Photo getphoto = entityContext.Photos.Find(photo.Id);
-                    ApplicationUser user = GetEntity(entityContext, id);
-                    if (user != null)
+                    if (user.Photos.Where(x => x.Id == getphoto.Id).Count() == 0)
                     {
-                        if (user.Photos.Where(x => x.Id == getphoto.Id).Count() == 0)
-                        {
-                            entityContext.Photos.Attach(getphoto);
-                            user.Photos.Add(getphoto);
-                            UpdateEntity(entityContext, user);
-                        }
+                        entityContext.Photos.Attach(getphoto);
+                        user.Photos.Add(getphoto);
+                        UpdateEntity(entityContext, user);
+                        entityContext.SaveChanges();
                     }
                 }
-                catch(Exception ex)
-                {
-
-                }
-          
             }
         }
         public void RemovePictureForUser(Photo photo, string id)
@@ -112,13 +107,15 @@ namespace Immedia.Picture.Data.Repository
                 return user.Places;
             }
         }
-        public List<Photo> GetUserPhotos(string userId)
+        public Result GetUserPhotos(string userId)
         {
 
             using (ApplicationDbContext entityContext = new ApplicationDbContext())
             {
-                ApplicationUser user = GetEntity(entityContext, userId);
-                return user.Photos;
+                Result result = new Result();
+                ApplicationUser user = entityContext.Users.Where(x => x.Id == userId).FirstOrDefault();
+                result.Photos = user.Photos;
+                return result;
             }
         }
     }

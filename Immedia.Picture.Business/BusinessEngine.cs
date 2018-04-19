@@ -6,11 +6,15 @@ using Immedia.Picture.Business.Interface;
 using Immedia.Picture.Data;
 using Immedia.Picture.Data.Interface;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
 using System.Threading.Tasks;
 using Hangfire;
+using Immedia.Picture.Api.Core.Common.Core;
+using Immedia.Picture.Data.Repository;
+using System.Web.Hosting;
 
 namespace Immedia.Picture.Business
 {
@@ -44,32 +48,36 @@ namespace Immedia.Picture.Business
 
             return point;
         }
-
-        public async Task<Result> GetLocationPicturesByIdAsync(Place place, int? page,string userId)
+        /// <summary>
+        /// Get's and saves Pictures by Id and also saves the Location of the User 
+        /// </summary>
+        /// <param name="place">The Location that was searched by the user </param>
+        /// <param name="page">Use this for paging</param>
+        /// <param name="userId">Id of the User</param>
+        /// <returns></returns>
+        public async Task<Result> GetLocationPicturesByIdAsync(Place place, int? page, string userId)
         {
-            //try
-            //{
-                SaveUserLocation(place,  userId);
-                Result result = await _searchRequest.GetPhotosforLocationAsync(place.Latitude, place.Longitude, page.Value);
+            SaveUserLocation(place, userId);
+            Result result = await _searchRequest.GetPhotosforLocationAsync(place.Latitude, place.Longitude, page.Value);
 
-            BackgroundJob.Enqueue(() => SavePictures(result, place));
-            //await SavePictures(result, place);
+            #region   TODO:// Implement Mef with HangFire
+            //BackgroundJob.Enqueue(() => SavePictures(result, place));
+            #endregion
 
-            if (result != null)
-                {
-                    return result;
-                }
+            HostingEnvironment.QueueBackgroundWorkItem(ct => SavePictures(result, place));
 
-                return null;
-            //}
-            //catch (Exception ex)
-            //{
-            //    return null;
+            return result;
 
-            //}
         }
-        public async Task SavePictures(Result result,Place place)
+        /// <summary>
+        /// Saves Pictures for a particular Place
+        /// </summary>
+        /// <param name="result"></param>
+        /// <param name="place">The place object that needs to be saved</param>
+        /// <returns></returns>
+        public async Task SavePictures(Result result, Place place)
         {
+
             while (result.Pages != result.Page)
             {
                 _PlaceRepository.SavePlacePhoto(place.PlaceId, result.Photos);
@@ -77,43 +85,45 @@ namespace Immedia.Picture.Business
                 result = await _searchRequest.GetPhotosforLocationAsync(place.Latitude, place.Longitude, result.Page);
             }
         }
+        /// <summary>
+        /// Get's Picture Location by Longitiude and Latitude and saves the pictures to the Database
+        /// </summary>
+        /// <param name="longitude">Location Longitude</param>
+        /// <param name="latitude">Location Latitude</param>
+        /// <param name="page">Use this for Paging</param>
+        /// <returns></returns>
         public async Task<Result> GetLocationByLonLat(string longitude, string latitude, int? page)
         {
-            try
-            {
-                Result result = await _searchRequest.GetPhotosforLocationAsync(latitude,longitude,page.Value);
-                Place place = await _searchRequest.GetLocationByLonLat(latitude, longitude);
-                BackgroundJob.Enqueue(() => SavePictures(result, place));
-                if (result != null)
-                {
-                    return result;
-                }
+            Result result = await _searchRequest.GetPhotosforLocationAsync(latitude, longitude, page.Value);
+            Place place = await _searchRequest.GetLocationByLonLat(latitude, longitude);
 
-                return null;
-            }
-            catch (Exception ex)
-            {
-                return null;
+            HostingEnvironment.QueueBackgroundWorkItem(ct => SavePictures(result, place));
 
-            }
+            #region   TODO:// Implement Mef with HangFire
+            //BackgroundJob.Enqueue(() => SavePictures(result, place));
+            #endregion
+
+
+            return result;
         }
-        public void SavePictureforUser(Photo photo,string userId)
+        /// <summary>
+        /// Saves Picture for a User 
+        /// </summary>
+        /// <param name="photo">Picture that is needed to be saved</param>
+        /// <param name="userId">Id of the User</param>
+        public void SavePictureforUser(Photo photo, string userId)
         {
-            try
+            if (!string.IsNullOrEmpty(userId) && photo != null)
             {
-                if (!string.IsNullOrEmpty(userId) && photo != null)
-                {
-                    _UserRepository = _DataRepositoryFactory.GetDataRepository<IUserRepository>();
-                    _UserRepository.SavePictureForUser(photo, userId);
-                }
-
-            }
-            catch (Exception ex)
-            {
-
+                _UserRepository = _DataRepositoryFactory.GetDataRepository<IUserRepository>();
+                _UserRepository.SavePictureForUser(photo, userId);
             }
         }
-
+        /// <summary>
+        /// Get Picture Details
+        /// </summary>
+        /// <param name="id">Id of the Picture</param>
+        /// <returns>Photo Object</returns>
         public Photo GetPictureDetails(int id)
         {
             return _PhotoRepository.Get(id.ToString());
@@ -124,16 +134,29 @@ namespace Immedia.Picture.Business
         /// </summary>
         /// <param name="query"></param>
         /// <returns></returns>
-        public async  Task<List<Place>> Getlocations(string query)
+        public async Task<List<Place>> Getlocations(string query)
         {
-            List<Place> places= await _searchRequest.GetLocationquery(query);
-            BackgroundJob.Enqueue(() => _PlaceRepository.SaveLocations(places) );
+
+            List<Place> places = await _searchRequest.GetLocationquery(query);
+            HostingEnvironment.QueueBackgroundWorkItem(ct => _PlaceRepository.SaveLocations(places));
+
+            #region   TODO:// Implement Mef with HangFire
+            //BackgroundJob.Enqueue(() => _PlaceRepository.SaveLocations(places));
+            #endregion
+
             return places;
         }
+
+        /// <summary>
+        /// Save User Location 
+        /// </summary>
+        /// <param name="place">the Location of the User</param>
+        /// <param name="userId">The User Id</param>
+        /// <returns>Place Object</returns>
         public Place SaveUserLocation(Place place, string userId)
         {
-            
-            if(_PlaceRepository.Get(place.PlaceId)==null)
+
+            if (_PlaceRepository.Get(place.PlaceId) == null)
             {
                 _PlaceRepository.Add(place);
             }
@@ -142,16 +165,29 @@ namespace Immedia.Picture.Business
                 _UserRepository.SaveUserLocation(userId, place);
             }
             return place;
+
         }
-            
-        public List<Photo> GetUserPhotos(string userId)
+        /// <summary>
+        /// Get Saved User Photos
+        /// </summary>
+        /// <param name="userId">The Id of the User</param>
+        /// <returns></returns>
+        public Result GetUserPhotos(string userId)
         {
             return _UserRepository.GetUserPhotos(userId);
         }
+        /// <summary>
+        /// Get Saved User Location
+        /// </summary>
+        /// <param name="UserId"></param>
+        /// <returns>List of Place</returns>
         public List<Place> GetUserLocations(string UserId)
         {
-           return _UserRepository.GetUserLocations(UserId);
+            return _UserRepository.GetUserLocations(UserId);
+
         }
+
+
         public ApiRequest Api;
         public string Apikey { get; } = "7e40b74b14e4b62ddd2cadb193d646ed";
         public void Init()

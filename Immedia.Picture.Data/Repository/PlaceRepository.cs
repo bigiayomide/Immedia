@@ -45,16 +45,24 @@ namespace Immedia.Picture.Data.Repository
         {
             using (ApplicationDbContext entityContext = new ApplicationDbContext())
             {
+
                 Place place = GetEntity(entityContext, placeId);
+                if (place == null)
+                    AddEntity(entityContext, place);
                 foreach (var item in photos)
                 {
-
-                    if (place.Photos.Where(x => x.Id == item.Id) == null)
+                    if (entityContext.Photos.Where(x => x.Id == item.Id).Count() == 0)
+                    {
+                        entityContext.Photos.Add(item);
+                        entityContext.SaveChanges();
+                    }
+                    if (place.Photos.Where(x => x.Id == item.Id).Count() == 0)
                     {
                         entityContext.Photos.Attach(item);
                         place.Photos.Add(item);
                     }
                 }
+
                 entityContext.SaveChanges();
             }
         }

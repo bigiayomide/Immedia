@@ -6,7 +6,7 @@
         <div class="col-lg-4 col-md-6 col-xs-6 image-div">
             <img data-bind="attr:{src: ImgUrl}" class="img-fluid img-thumbnail"  alt="">
             <div class="middle">
-                <a class="btn btn-success btn-sm btn-inline">
+                <a  data-bind="attr:{href: ImgUrl, download:ImgUrl}" class="btn btn-success btn-sm btn-inline">
                     <span class="glyphicon glyphicon-save"></span> Save
                 </a>
                 <a data-bind="click: $root.favourite"class="btn btn-success btn-sm btn-inline">

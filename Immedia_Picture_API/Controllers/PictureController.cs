@@ -1,11 +1,8 @@
 ﻿using Immedia.Picture.Api.Core.Common.Core;
-using Immedia.Picture.Api.Core.Contracts;
 using Immedia.Picture.Api.Entities;
-using Immedia.Picture.Business;
 using Immedia.Picture.Business.Interface;
 using Microsoft.AspNet.Identity;
 using System;
-using System.ComponentModel.Composition;
 using System.Net;
 using System.Threading.Tasks;
 using System.Web.Http;
@@ -16,20 +13,12 @@ namespace Immedia_Picture_API.Controllers
     [RoutePrefix("api/Picture")]
     public class PictureController : ApiController
     {
-        [Import]
-        IBusinessEngineFactory _BusinessRepositoryFactory;
         IBusinessEngine business;
         public PictureController()
         {
+            if(business==null)
             business=ObjectBase.Container.GetExportedValue<IBusinessEngine>();
         }
-        [ImportingConstructor]
-        public PictureController(IBusinessEngineFactory BusinessRepositoryFactory)
-        {
-            _BusinessRepositoryFactory = BusinessRepositoryFactory;
-        }
-
-
 
         [Route("GetLocationPicturesById")]
         [HttpPost]
@@ -42,7 +31,7 @@ namespace Immedia_Picture_API.Controllers
             }
             catch (Exception ex)
             {
-                return Content(HttpStatusCode.InternalServerError, "");
+                return Content(HttpStatusCode.InternalServerError, ex.Message);
             }
         }
         [Route("GetLocationByLonLat")]
@@ -59,6 +48,7 @@ namespace Immedia_Picture_API.Controllers
         }
         [Route("SavePictureforUser")]
         [Authorize]
+        [HttpPost]
         public IHttpActionResult SavePictureforUser(Photo photo)
         {
             try
@@ -72,14 +62,14 @@ namespace Immedia_Picture_API.Controllers
             }
         }
         [Route("GetUserPictures")]
-        [Authorize]
+
         public IHttpActionResult GetUserPictures()
         {
             try
             {
                 string userId = User.Identity.GetUserId();
-                business.GetUserPhotos(userId);
-                return Ok();
+                Result result = business.GetUserPhotos(userId);
+                return Content(HttpStatusCode.OK, result);
             }
             catch (Exception ex)
             {
@@ -111,16 +101,17 @@ namespace Immedia_Picture_API.Controllers
             }
         }
         [Route("GetUserLocations")]
-        public IHttpActionResult GetUserLocations()
+        [Authorize]
+        public  IHttpActionResult GetUserLocations()
         {
             try
             {
-                string UserId = User.Identity.GetUserId();
-                return Content(HttpStatusCode.OK, business.GetUserLocations(UserId));
+                string userId = User.Identity.GetUserId();
+                return Content(HttpStatusCode.OK, business.GetUserLocations(userId));
             }
             catch(Exception ex)
             {
-                return Content(HttpStatusCode.OK, ex.Message);
+                return Content(HttpStatusCode.InternalServerError, ex.Message);
             }
 
         }
