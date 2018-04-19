@@ -76,15 +76,17 @@
                         <h3>Immedia</h3>
                     </div>
 
-                    <ul class="list-unstyled components">
-                        <p>Dummy Heading</p>
+                    <ul  class="list-unstyled components">
+                        <p>Actions</p>
                         <li>
                             <a href="/">Home</a>
                             <a data-bind="click: UserPictures">Saved Pictures</a>
-                             <a  data-bind="with: UserLocation" data-toggle="collapse" aria-expanded="false">My Locations</a>
-                            @*<ul data-bind="foreach: places" class="collapse list-unstyled" id="pageSubmenu">
-                                <li><a data-bind="attr:{href: PlaceId} text: Value" ></a></li>
-                            </ul>*@
+                        </li>
+                        <li data-bind="with: UserLocation">
+                            <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="true" class="">My Locations</a>
+                            <ul class="list-unstyled " data-bind="foreach: $data" id="pageSubmenu" aria-expanded="true" style="">
+                                <li><a data-bind="text: $data.Value">Page 1</a></li>
+                            </ul>
                         </li>
                     </ul>
 
@@ -137,5 +139,6 @@
     @Scripts.Render("~/bundles/bootstrap")
         @Scripts.Render("~/bundles/app")
     @RenderSection("scripts", required: false)
+
 </body>
 </html>

@@ -39,6 +39,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Immedia.Picture.Business.In
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Immedia.Picture.Api.Bootstraper", "Immedia.Picture.Api.Bootstraper\Immedia.Picture.Api.Bootstraper.csproj", "{9AE1621C-895A-43C8-BF32-030F5A1C26B5}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{0C78C87D-353C-4DB1-AB35-A9D5BCAA6D60}"
+	ProjectSection(SolutionItems) = preProject
+		Readme.md = Readme.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

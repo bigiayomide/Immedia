@@ -26,13 +26,18 @@ namespace Immedia.Picture.Api
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
+            System.Web.Http.GlobalConfiguration.Configuration.Formatters.JsonFormatter.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+            System.Web.Http.GlobalConfiguration.Configuration.Formatters
+                .Remove(System.Web.Http.GlobalConfiguration.Configuration.Formatters.XmlFormatter);
+
+
             //Get Instances of Classes at Runtime and safe it in a container 
             AggregateCatalog catalog = new AggregateCatalog();
             catalog.Catalogs.Add(new AssemblyCatalog(Assembly.GetExecutingAssembly()));
             CompositionContainer container = MefLoader.Init(catalog.Catalogs);
             ObjectBase.Container = container;
             Hangfire.GlobalConfiguration.Configuration.UseMEFActivator(container);
-            JobActivator.Current = new MEFJobActivator(container);
+
             DependencyResolver.SetResolver(new MefDependencyResolver(container)); // view controllers
             System.Web.Http.GlobalConfiguration.Configuration.DependencyResolver = new MefAPIDependencyResolver(container);
         }

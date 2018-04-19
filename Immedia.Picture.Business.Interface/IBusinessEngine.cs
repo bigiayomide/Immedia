@@ -1,6 +1,7 @@
 ﻿using GoogleMaps.LocationServices;
 using Immedia.Picture.Api.Entities;
 using System.Collections.Generic;
+using System.Collections;
 using System.Threading.Tasks;
 
 namespace Immedia.Picture.Business.Interface
@@ -14,6 +15,8 @@ namespace Immedia.Picture.Business.Interface
         Photo GetPictureDetails(int id);
         Task<List<Place>> Getlocations(string query);
         List<Place> GetUserLocations(string UserId);
-        List<Photo> GetUserPhotos(string userId);
+        //List<Photo> GetUserPhotos(string userId);
+        Task SavePictures(Result result, Place place);
+        Result GetUserPhotos(string userId);
     }
 }

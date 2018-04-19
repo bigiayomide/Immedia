@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -31,8 +32,11 @@ namespace Immedia.Picture.Api.Entities
         public string Value { get; set; }
 
         [DataMember(Name= "photos")]
+        [JsonIgnore]
+        [XmlIgnore]
         public virtual List<Photo> Photos { get; set; }
-
+        [JsonIgnore]
+        [XmlIgnore]
         public virtual List<ApplicationUser> Users { get; set; }
     }
 }
